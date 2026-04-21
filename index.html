@@ -3,15 +3,387 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anthonin Portfolio</title>
+  <title>Portfolio</title>
 
-  <!-- Meta Tags for SEO -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    body{
+      margin:0;
+      font-family:Segoe UI, sans-serif;
+      color:white;
+
+      background:
+              linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.92)),
+              url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+
+      background-attachment:fixed;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      backdrop-filter: blur(7px);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+              linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size:60px 60px;
+      opacity:0.12;
+      z-index:1;
+    }
+
+    main, .sidebar, .hero{
+      position:relative;
+      z-index:2;
+    }
+
+    /* SIDEBAR */
+    .sidebar{
+      position:fixed;
+      left:0;
+      top:0;
+      height:100vh;
+      width:220px;
+      background:rgba(10,15,25,0.75);
+      backdrop-filter: blur(12px);
+      border-right:1px solid rgba(77,163,255,0.25);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .sidebar h3{ color:#4da3ff; }
+
+    .sidebar a{
+      color:white;
+      text-decoration:none;
+      padding:10px;
+      border-radius:8px;
+    }
+
+    .sidebar a:hover{
+      background:rgba(77,163,255,0.15);
+    }
+
+    /* TOP ONLY DARK MODE */
+    .top-controls{
+      position:fixed;
+      top:15px;
+      right:15px;
+      z-index:10;
+    }
+
+    .switch{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      width:90px;
+      padding:5px 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .switch input{ display:none; }
+
+    .slider{
+      width:28px;
+      height:14px;
+      background:rgba(255,255,255,0.25);
+      border-radius:999px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .slider::before{
+      content:"";
+      position:absolute;
+      width:10px;
+      height:10px;
+      top:2px;
+      left:2px;
+      background:white;
+      border-radius:50%;
+      transition:0.3s;
+    }
+
+    input:checked + .slider::before{
+      transform:translateX(14px);
+    }
+
+    input:checked + .slider{
+      background:#4da3ff;
+    }
+
+    .icon{ font-size:16px; }
+
+    /* MAIN */
+    main{
+      margin-left:240px;
+      padding:40px;
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap:60px;
+      align-items:center;
+      padding:120px 20px 60px;
+    }
+
+    .hero-left{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .role{
+      font-size:13px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      opacity:0.6;
+    }
+
+    .hero h1{
+      font-size:84px;
+      margin:0;
+      line-height:0.95;
+      background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    /* ===== TEXT RESTAURÉ (plus vivant) ===== */
+    .desc{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
+      padding:22px;
+      border-radius:14px;
+      backdrop-filter: blur(10px);
+
+      font-size:14px;
+      line-height:1.75;
+
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    /* blocs lisibles */
+    .desc div{
+      position:relative;
+      padding-left:18px;
+      opacity:0.95;
+    }
+
+    /* accent gradient */
+    .desc div::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:6px;
+      width:4px;
+      height:70%;
+      background:linear-gradient(#4da3ff, #7c3aed);
+      border-radius:10px;
+    }
+
+    /* VIDEO FIX */
+    .hero-right{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:center;
+    }
+
+    .video-title{
+      font-size:18px;
+      color:#4da3ff;
+    }
+
+    .video-wrapper{
+      width:100%;
+      max-width:900px;
+      aspect-ratio:16/9;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.12);
+      box-shadow:0 25px 90px rgba(0,0,0,0.7);
+    }
+
+    .video-wrapper iframe{
+      width:100%;
+      height:100%;
+    }
+
+    /* PROJECT TITLE GRADIENT */
+    .section-title{
+      margin-top:80px;
+      font-size:28px;
+      background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    /* PROJECT */
+    .latest-project{
+      margin-top:30px;
+      display:grid;
+      grid-template-columns:1.2fr 1.8fr;
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(77,163,255,0.25);
+    }
+
+    .project-info{
+      padding:40px;
+    }
+
+    .project-info h3{
+      font-size:34px;
+      margin:0;
+    }
+
+    .project-info p{
+      margin-top:15px;
+      opacity:0.75;
+      line-height:1.6;
+    }
+
+    .project-image{
+      min-height:520px;
+      background:
+              linear-gradient(135deg, rgba(124,58,237,0.35), rgba(77,163,255,0.35)),
+              url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+    }
+
+    /* LIGHT MODE FIX COMPLET */
+    body.light{
+      color:#111;
+      background:
+              linear-gradient(rgba(245,245,245,0.95), rgba(235,235,235,0.95)),
+              url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+    }
+
+    body.light .sidebar{
+      background:rgba(255,255,255,0.8);
+      border-right:1px solid rgba(0,0,0,0.1);
+    }
+
+    body.light .sidebar a{ color:#111; }
+
+    body.light .desc{
+      background:rgba(255,255,255,0.6);
+      border:1px solid rgba(0,0,0,0.1);
+      color:#111;
+    }
+
+    body.light .latest-project{
+      background:rgba(255,255,255,0.6);
+      border:1px solid rgba(0,0,0,0.1);
+    }
+
+    body.light .section-title{
+      -webkit-text-fill-color:initial;
+      color:#4da3ff;
+    }
+
+    body.light .video-title{
+      color:#4da3ff;
+    }
+
+  </style>
 </head>
 
 <body>
 
-<!-- your shit HERE -->
+<div class="top-controls">
+  <label class="switch">
+    <span class="icon">🌙</span>
+    <input type="checkbox" id="themeToggle" checked>
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="sidebar">
+  <h3>DEV PORTFOLIO</h3>
+  <a href="index.html">Home</a>
+  <a href="info.html">Info</a>
+  <a href="project.html">Project</a>
+</div>
+
+<main>
+
+  <section class="hero">
+
+    <div class="hero-left">
+
+      <div class="role">Gameplay Programmer</div>
+
+      <h1>Anthonin KADI</h1>
+
+      <div class="desc">
+
+        <div>I’m a 5th-year student at ARTFX, specializing in gameplay programming for video games.</div>
+        <div>Passionate about MOBAs, sandbox systems and gameplay design.</div>
+        <div>I work with Unreal Engine and Unity using C++ and C#.</div>
+        <div>Asian cultures inspire my design approach.</div>
+        <div>I aim to create immersive gameplay experiences.</div>
+
+      </div>
+
+    </div>
+
+    <div class="hero-right">
+
+      <div class="video-title">Demoreel 2026 - 5th Year ARTFX</div>
+
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+    </div>
+
+  </section>
+
+  <h2 class="section-title">Latest Project</h2>
+
+  <div class="latest-project">
+
+    <div class="project-info">
+      <h3>Another World Remake</h3>
+      <p>
+        Gameplay-focused remake built in Unreal Engine with enemy AI systems,
+        combat feel iteration and immersive level storytelling.
+      </p>
+    </div>
+
+    <div class="project-image"></div>
+
+  </div>
+
+</main>
+
+<script>
+
+  document.getElementById("themeToggle").addEventListener("change", function(){
+    document.body.classList.toggle("light", !this.checked);
+  });
+
+</script>
 
 </body>
 </html>
