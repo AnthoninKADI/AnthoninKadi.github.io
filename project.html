@@ -19,15 +19,6 @@
             background-attachment:fixed;
         }
 
-        /* LIGHT MODE FIX GLOBAL */
-        body.light{
-            color:#111;
-            background:
-                    linear-gradient(rgba(245,245,245,0.95), rgba(235,235,235,0.95)),
-                    url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
-        }
-
-        /* overlay */
         body::after{
             content:"";
             position:fixed;
@@ -80,59 +71,6 @@
             background:rgba(77,163,255,0.15);
         }
 
-        /* TOP SWITCH */
-        .top-controls{
-            position:fixed;
-            top:15px;
-            right:15px;
-            z-index:10;
-        }
-
-        .switch{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            width:90px;
-            padding:5px 8px;
-            border-radius:999px;
-            background:rgba(255,255,255,0.06);
-            border:1px solid rgba(255,255,255,0.25);
-            backdrop-filter: blur(10px);
-        }
-
-        .switch input{ display:none; }
-
-        .slider{
-            width:28px;
-            height:14px;
-            background:rgba(255,255,255,0.25);
-            border-radius:999px;
-            position:relative;
-            transition:0.3s;
-        }
-
-        .slider::before{
-            content:"";
-            position:absolute;
-            width:10px;
-            height:10px;
-            top:2px;
-            left:2px;
-            background:white;
-            border-radius:50%;
-            transition:0.3s;
-        }
-
-        input:checked + .slider::before{
-            transform:translateX(14px);
-        }
-
-        input:checked + .slider{
-            background:#4da3ff;
-        }
-
-        .icon{ font-size:16px; }
-
         /* MAIN */
         main{
             margin-left:240px;
@@ -141,26 +79,45 @@
             z-index:2;
         }
 
-        /* TITLE FIX LIGHT MODE */
         h1{
             font-size:52px;
-            margin-bottom:40px;
+            margin-bottom:20px;
             background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
         }
 
-        body.light h1{
-            -webkit-text-fill-color:initial;
-            color:#2b2b2b;
+        /* FILTERS */
+        .filters{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-bottom:35px;
+        }
+
+        .filter{
+            padding:10px 14px;
+            border-radius:999px;
+            cursor:pointer;
+            font-size:13px;
+
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.15);
+
+            transition:0.2s;
+        }
+
+        .filter:hover{ transform:scale(1.05); }
+
+        .filter.active{
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            border:none;
         }
 
         /* PROJECT */
         .project{
             display:flex;
-            align-items:center;
-            justify-content:space-between;
-            margin-bottom:35px;
+            margin-bottom:30px;
 
             background:rgba(255,255,255,0.04);
             border:1px solid rgba(77,163,255,0.2);
@@ -170,13 +127,12 @@
             min-height:220px;
         }
 
-        .project.reverse{
+        .project:nth-child(even){
             flex-direction:row-reverse;
         }
 
         .project img{
             width:45%;
-            height:100%;
             object-fit:cover;
         }
 
@@ -187,19 +143,18 @@
 
         .content h2{
             margin:0;
-            font-size:28px;
+            font-size:26px;
             color:#4da3ff;
         }
 
         .content p{
-            margin-top:12px;
             opacity:0.8;
-            line-height:1.6;
+            line-height:1.5;
         }
 
         /* TAGS */
         .tags{
-            margin-top:12px;
+            margin-top:10px;
             display:flex;
             flex-wrap:wrap;
             gap:8px;
@@ -222,21 +177,19 @@
             font-size:13px;
             text-decoration:none;
             color:white;
+
             background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            transition:0.2s;
         }
 
-        .btn:hover{ transform:scale(1.05); }
-
-        /* LIGHT FIX TEXT */
-        body.light .content,
-        body.light p,
-        body.light .tag{
-            color:#111;
+        .btn:hover{
+            transform:scale(1.05);
+            box-shadow:0 10px 25px rgba(77,163,255,0.3);
         }
 
-        body.light .project{
-            background:rgba(255,255,255,0.7);
-            border:1px solid rgba(0,0,0,0.1);
+        /* HIDE */
+        .hide{
+            display:none;
         }
 
     </style>
@@ -244,110 +197,107 @@
 
 <body>
 
-<div class="top-controls">
-    <label class="switch">
-        <span class="icon">🌙</span>
-        <input type="checkbox" id="themeToggle" checked>
-        <span class="slider"></span>
-    </label>
-</div>
-
 <div class="sidebar">
     <h3>DEV PORTFOLIO</h3>
     <a href="index.html">Home</a>
     <a href="project.html">Projects</a>
     <a href="info.html">Info</a>
-
 </div>
 
 <main>
 
     <h1>Projects</h1>
 
-    <!-- 1 -->
-    <div class="project">
+    <!-- FILTERS -->
+    <div class="filters">
+        <div class="filter active" onclick="filterProjects('all', this)">All</div>
+        <div class="filter" onclick="filterProjects('C#', this)">C#</div>
+        <div class="filter" onclick="filterProjects('C++', this)">C++</div>
+        <div class="filter" onclick="filterProjects('Unity', this)">Unity</div>
+        <div class="filter" onclick="filterProjects('Unreal', this)">Unreal</div>
+        <div class="filter" onclick="filterProjects('3D', this)">3D</div>
+        <div class="filter" onclick="filterProjects('2D', this)">2D</div>
+        <div class="filter" onclick="filterProjects('2.5D', this)">2.5D</div>
+    </div>
+
+    <!-- PROJECTS -->
+
+    <div class="project" data-tags="Unreal C++ 3D">
         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f">
         <div class="content">
-            <h2>Project One</h2>
-            <p>Gameplay system prototype focused on combat feel and responsiveness.</p>
-            <div class="tags"><span class="tag">Unreal</span><span class="tag">C++</span></div>
+            <h2>Project 1</h2>
+            <p>Combat system prototype focused on feel.</p>
+            <div class="tags"><span class="tag">Unreal</span><span class="tag">C++</span><span class="tag">3D</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 2 -->
-    <div class="project reverse">
+    <div class="project" data-tags="Unreal AI 3D">
         <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d">
         <div class="content">
-            <h2>Project Two</h2>
-            <p>Enemy AI system with behavior trees and dynamic reactions.</p>
-            <div class="tags"><span class="tag">AI</span><span class="tag">Systems</span></div>
+            <h2>Project 2</h2>
+            <p>Enemy AI system with behavior trees.</p>
+            <div class="tags"><span class="tag">Unreal</span><span class="tag">AI</span><span class="tag">3D</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 3 -->
-    <div class="project">
+    <div class="project" data-tags="Unity C# 3D">
         <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1">
         <div class="content">
-            <h2>Project Three</h2>
-            <p>Movement system inspired by fast-paced action games.</p>
-            <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span></div>
+            <h2>Project 3</h2>
+            <p>Fast movement system inspired by action games.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 4 -->
-    <div class="project reverse">
+    <div class="project" data-tags="C++ Networking 3D">
         <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f">
         <div class="content">
-            <h2>Project Four</h2>
-            <p>Multiplayer prototype with synchronized gameplay states.</p>
-            <div class="tags"><span class="tag">Networking</span><span class="tag">C++</span></div>
+            <h2>Project 4</h2>
+            <p>Multiplayer prototype with synced gameplay.</p>
+            <div class="tags"><span class="tag">C++</span><span class="tag">Networking</span><span class="tag">3D</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 5 -->
-    <div class="project">
+    <div class="project" data-tags="Unity 2D C#">
         <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e">
         <div class="content">
-            <h2>Project Five</h2>
-            <p>Interactive level design focused on exploration.</p>
-            <div class="tags"><span class="tag">Level Design</span></div>
+            <h2>Project 5</h2>
+            <p>2D exploration gameplay prototype.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">2D</span><span class="tag">C#</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 6 -->
-    <div class="project reverse">
+    <div class="project" data-tags="Unreal 3D RPG">
         <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
         <div class="content">
-            <h2>Project Six</h2>
-            <p>RPG combat system with progression mechanics.</p>
-            <div class="tags"><span class="tag">RPG</span><span class="tag">Systems</span></div>
+            <h2>Project 6</h2>
+            <p>RPG combat system with progression.</p>
+            <div class="tags"><span class="tag">Unreal</span><span class="tag">3D</span><span class="tag">RPG</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 7 -->
-    <div class="project">
+    <div class="project" data-tags="Unity 2.5D C#">
         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
         <div class="content">
-            <h2>Project Seven</h2>
-            <p>Animation system integration for gameplay feedback.</p>
-            <div class="tags"><span class="tag">Animation</span></div>
+            <h2>Project 7</h2>
+            <p>2.5D animation-driven gameplay system.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">2.5D</span><span class="tag">C#</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
 
-    <!-- 8 -->
-    <div class="project reverse">
+    <div class="project" data-tags="Unreal C++ 3D">
         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f">
         <div class="content">
-            <h2>Project Eight</h2>
-            <p>Final year project combining all systems.</p>
-            <div class="tags"><span class="tag">Unreal</span><span class="tag">Final</span></div>
+            <h2>Project 8</h2>
+            <p>Final year gameplay systems integration project.</p>
+            <div class="tags"><span class="tag">Unreal</span><span class="tag">C++</span><span class="tag">3D</span></div>
             <a class="btn" href="#">View Project</a>
         </div>
     </div>
@@ -355,9 +305,30 @@
 </main>
 
 <script>
-    document.getElementById("themeToggle").addEventListener("change", function(){
-        document.body.classList.toggle("light", !this.checked);
-    });
+
+    function filterProjects(tag, el){
+
+        document.querySelectorAll(".filter").forEach(f => f.classList.remove("active"));
+        el.classList.add("active");
+
+        document.querySelectorAll(".project").forEach(p => {
+
+            const tags = p.getAttribute("data-tags");
+
+            if(tag === "all"){
+                p.classList.remove("hide");
+                return;
+            }
+
+            if(tags.includes(tag)){
+                p.classList.remove("hide");
+            } else {
+                p.classList.add("hide");
+            }
+
+        });
+    }
+
 </script>
 
 </body>

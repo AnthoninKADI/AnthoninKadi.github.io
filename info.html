@@ -1,29 +1,71 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Info</title>
 
     <style>
+
         body{
             margin:0;
-            font-family:Segoe UI;
-            background:#0b0f17;
+            font-family:Segoe UI, sans-serif;
             color:white;
+
+            background:
+                    linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.92)),
+                    url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+
+            background-attachment:fixed;
         }
 
+        body.light{
+            color:#111;
+            background:
+                    linear-gradient(rgba(245,245,245,0.95), rgba(235,235,235,0.95)),
+                    url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+        }
+
+        body::after{
+            content:"";
+            position:fixed;
+            inset:0;
+            backdrop-filter: blur(7px);
+            pointer-events:none;
+            z-index:0;
+        }
+
+        body::before{
+            content:"";
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            background-image:
+                    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size:60px 60px;
+            opacity:0.12;
+            z-index:1;
+        }
+
+        /* SIDEBAR */
         .sidebar{
             position:fixed;
             left:0;
             top:0;
-            width:220px;
             height:100vh;
-            background:#111827;
+            width:220px;
+            background:rgba(10,15,25,0.75);
+            backdrop-filter: blur(12px);
+            border-right:1px solid rgba(77,163,255,0.25);
+            padding:20px;
             display:flex;
             flex-direction:column;
-            padding:20px;
-            gap:10px;
+            gap:12px;
+            z-index:2;
         }
+
+        .sidebar h3{ color:#4da3ff; }
 
         .sidebar a{
             color:white;
@@ -33,42 +75,403 @@
         }
 
         .sidebar a:hover{
-            background:#1f2937;
+            background:rgba(77,163,255,0.15);
         }
 
+        /* SWITCH */
+        .top-controls{
+            position:fixed;
+            top:15px;
+            right:15px;
+            z-index:10;
+        }
+
+        .switch{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            width:90px;
+            padding:5px 8px;
+            border-radius:999px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.25);
+        }
+
+        .switch input{ display:none; }
+
+        .slider{
+            width:28px;
+            height:14px;
+            background:rgba(255,255,255,0.25);
+            border-radius:999px;
+            position:relative;
+        }
+
+        .slider::before{
+            content:"";
+            position:absolute;
+            width:10px;
+            height:10px;
+            top:2px;
+            left:2px;
+            background:white;
+            border-radius:50%;
+            transition:0.3s;
+        }
+
+        input:checked + .slider::before{
+            transform:translateX(14px);
+        }
+
+        input:checked + .slider{
+            background:#4da3ff;
+        }
+
+        /* MAIN */
         main{
             margin-left:240px;
-            padding:40px;
+            padding:80px 40px;
+            position:relative;
+            z-index:2;
         }
 
-        h1{
-            color:#7c3aed;
+        /* HERO */
+        .hero{
+            text-align:center;
+            margin-bottom:40px;
         }
+
+        .hero h1{
+            font-size:60px;
+            margin:0;
+            background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        body.light .hero h1{
+            -webkit-text-fill-color:initial;
+            color:#2b2b2b;
+        }
+
+        .subtitle{
+            opacity:0.7;
+        }
+
+        /* GRID */
+        .grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:30px;
+            align-items:start;
+        }
+
+        /* CARD */
+        .card{
+            padding:30px;
+            border-radius:18px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(77,163,255,0.2);
+        }
+
+        /* DESC STYLE LIKE INDEX */
+        .desc{
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.10);
+            padding:22px;
+            border-radius:14px;
+            backdrop-filter: blur(10px);
+
+            font-size:14px;
+            line-height:1.75;
+
+            display:flex;
+            flex-direction:column;
+            gap:14px;
+        }
+
+        .desc div{
+            position:relative;
+            padding-left:18px;
+            opacity:0.9;
+        }
+
+        .desc div::before{
+            content:"";
+            position:absolute;
+            left:0;
+            top:6px;
+            width:4px;
+            height:70%;
+            background:linear-gradient(#4da3ff, #7c3aed);
+            border-radius:10px;
+        }
+
+        /* SKILLS */
+        .skills{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-top:10px;
+        }
+
+        .skill{
+            padding:8px 12px;
+            border-radius:999px;
+            background:rgba(124,58,237,0.2);
+            border:1px solid rgba(124,58,237,0.4);
+            font-size:13px;
+        }
+
+        /* CENTER LINKS BLOCK */
+        .links-wrapper{
+            grid-column: span 2;
+            display:flex;
+            justify-content:center;
+        }
+
+        .links-card{
+            width:100%;
+            max-width:700px;
+        }
+
+        /* BUTTONS */
+        .links{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:15px;
+            margin-top:20px;
+        }
+
+        /* fancy button */
+        .fancy-btn{
+            position:relative;
+            padding:20px;
+            border-radius:16px;
+            text-decoration:none;
+            color:white;
+            font-size:15px;
+            overflow:hidden;
+
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.1);
+
+            transition:0.3s;
+        }
+
+        .fancy-btn span{
+            font-size:12px;
+            opacity:0.6;
+        }
+
+        .fancy-btn::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            border-radius:16px;
+            padding:1px;
+            background:linear-gradient(120deg,#4da3ff,#7c3aed,#4da3ff);
+            -webkit-mask:
+                    linear-gradient(#000 0 0) content-box,
+                    linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity:0.4;
+        }
+
+        .fancy-btn:hover{
+            transform:translateY(-5px) scale(1.02);
+            box-shadow:0 15px 40px rgba(77,163,255,0.3);
+        }
+
+        /* CV */
+        .cv-btn{
+            grid-column:span 2;
+            text-align:center;
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            font-weight:bold;
+        }
+
+        /* MODAL */
+        .modal{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.7);
+            display:none;
+            align-items:center;
+            justify-content:center;
+            z-index:20;
+        }
+
+        .modal-content{
+            background:#0f172a;
+            padding:35px;
+            border-radius:18px;
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+            align-items:center;
+            border:1px solid rgba(77,163,255,0.3);
+        }
+
+        /* CV BUTTONS */
+        .cv-options{
+            display:flex;
+            gap:20px;
+        }
+
+        .cv-choice{
+            padding:14px 24px;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:bold;
+            border:none;
+            transition:0.25s;
+        }
+
+        .cv-fr{ background:#4da3ff; color:white; }
+        .cv-en{ background:#7c3aed; color:white; }
+
+        .cv-choice:hover{
+            transform:scale(1.1);
+        }
+
+        /* CANCEL FIX HOVER */
+        .cv-cancel{
+            margin-top:5px;
+            background:transparent;
+            border:1px solid rgba(255,255,255,0.3);
+            color:white;
+            padding:10px 20px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:0.25s;
+        }
+
+        .cv-cancel:hover{
+            background:rgba(255,255,255,0.08);
+            border-color:rgba(255,255,255,0.6);
+            transform:scale(1.05);
+        }
+
+        .modal.show{
+            display:flex;
+        }
+
     </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-    <h3 style="color:#4da3ff;">DEV PORTFOLIO</h3>
+<div class="top-controls">
+    <label class="switch">
+        <span>🌙</span>
+        <input type="checkbox" id="themeToggle" checked>
+        <span class="slider"></span>
+    </label>
+</div>
 
+<div class="sidebar">
+    <h3>DEV PORTFOLIO</h3>
     <a href="index.html">Home</a>
-    <a href="info.html">Info</a>
     <a href="project.html">Projects</a>
+    <a href="info.html">Info</a>
 </div>
 
 <main>
-    <h1>À propos</h1>
 
-    <p>
-        Développeur spécialisé en :
-        <br><br>
-        • C++ (systèmes bas niveau, gameplay)<br>
-        • C# (Unity)<br>
-        • Unreal Engine (Blueprint + C++)<br>
-        • Architecture de jeux vidéo
-    </p>
+    <div class="hero">
+        <h1>About Me</h1>
+        <div class="subtitle">Gameplay Programmer • Systems • Design</div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>About</h2>
+
+            <div class="desc">
+                <div>I build gameplay systems that feel responsive and satisfying.</div>
+                <div>I focus on combat, AI systems and player movement.</div>
+                <div>I like emergent gameplay and systemic design.</div>
+                <div>My goal is to create strong game feel experiences.</div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill">Unreal</div>
+                <div class="skill">Unity</div>
+                <div class="skill">C++</div>
+                <div class="skill">C#</div>
+                <div class="skill">AI</div>
+            </div>
+        </div>
+
+        <div class="links-wrapper">
+            <div class="card links-card">
+                <h2>Links</h2>
+
+                <div class="links">
+                    <a class="fancy-btn" href="https://linkedin.com" target="_blank">
+                        LinkedIn <span>Profile</span>
+                    </a>
+
+                    <a class="fancy-btn" href="https://itch.io" target="_blank">
+                        Itch.io <span>Games</span>
+                    </a>
+
+                    <a class="fancy-btn" href="https://github.com" target="_blank">
+                        GitHub <span>Code</span>
+                    </a>
+
+                    <div class="fancy-btn cv-btn" onclick="openModal()">
+                        Download CV <span>FR / EN</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
 </main>
+
+<!-- MODAL -->
+<div class="modal" id="cvModal">
+    <div class="modal-content">
+        <h3>Download CV</h3>
+
+        <div class="cv-options">
+            <button class="cv-choice cv-fr" onclick="downloadCV('fr')">🇫🇷 Français</button>
+            <button class="cv-choice cv-en" onclick="downloadCV('en')">🇬🇧 English</button>
+        </div>
+
+        <button class="cv-cancel" onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("themeToggle").addEventListener("change", function(){
+        document.body.classList.toggle("light", !this.checked);
+    });
+
+    function openModal(){
+        document.getElementById("cvModal").classList.add("show");
+    }
+
+    function closeModal(){
+        document.getElementById("cvModal").classList.remove("show");
+    }
+
+    function downloadCV(lang){
+        window.location.href = (lang === "fr") ? "cv_fr.pdf" : "cv_en.pdf";
+    }
+
+</script>
 
 </body>
 </html>
