@@ -1,29 +1,73 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
 
     <style>
+
         body{
             margin:0;
-            font-family:Segoe UI;
-            background:#0b0f17;
+            font-family:Segoe UI, sans-serif;
             color:white;
+
+            background:
+                    linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.92)),
+                    url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+
+            background-attachment:fixed;
         }
 
+        /* LIGHT MODE FIX GLOBAL */
+        body.light{
+            color:#111;
+            background:
+                    linear-gradient(rgba(245,245,245,0.95), rgba(235,235,235,0.95)),
+                    url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
+        }
+
+        /* overlay */
+        body::after{
+            content:"";
+            position:fixed;
+            inset:0;
+            backdrop-filter: blur(7px);
+            pointer-events:none;
+            z-index:0;
+        }
+
+        body::before{
+            content:"";
+            position:fixed;
+            inset:0;
+            pointer-events:none;
+            background-image:
+                    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size:60px 60px;
+            opacity:0.12;
+            z-index:1;
+        }
+
+        /* SIDEBAR */
         .sidebar{
             position:fixed;
             left:0;
             top:0;
-            width:220px;
             height:100vh;
-            background:#111827;
+            width:220px;
+            background:rgba(10,15,25,0.75);
+            backdrop-filter: blur(12px);
+            border-right:1px solid rgba(77,163,255,0.25);
+            padding:20px;
             display:flex;
             flex-direction:column;
-            padding:20px;
-            gap:10px;
+            gap:12px;
+            z-index:2;
         }
+
+        .sidebar h3{ color:#4da3ff; }
 
         .sidebar a{
             color:white;
@@ -33,59 +77,288 @@
         }
 
         .sidebar a:hover{
-            background:#1f2937;
+            background:rgba(77,163,255,0.15);
         }
 
+        /* TOP SWITCH */
+        .top-controls{
+            position:fixed;
+            top:15px;
+            right:15px;
+            z-index:10;
+        }
+
+        .switch{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            width:90px;
+            padding:5px 8px;
+            border-radius:999px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        .switch input{ display:none; }
+
+        .slider{
+            width:28px;
+            height:14px;
+            background:rgba(255,255,255,0.25);
+            border-radius:999px;
+            position:relative;
+            transition:0.3s;
+        }
+
+        .slider::before{
+            content:"";
+            position:absolute;
+            width:10px;
+            height:10px;
+            top:2px;
+            left:2px;
+            background:white;
+            border-radius:50%;
+            transition:0.3s;
+        }
+
+        input:checked + .slider::before{
+            transform:translateX(14px);
+        }
+
+        input:checked + .slider{
+            background:#4da3ff;
+        }
+
+        .icon{ font-size:16px; }
+
+        /* MAIN */
         main{
             margin-left:240px;
-            padding:40px;
+            padding:60px 40px;
+            position:relative;
+            z-index:2;
         }
 
+        /* TITLE FIX LIGHT MODE */
         h1{
-            color:#00ff88;
+            font-size:52px;
+            margin-bottom:40px;
+            background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
-        .grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:20px;
+        body.light h1{
+            -webkit-text-fill-color:initial;
+            color:#2b2b2b;
         }
 
-        .card{
-            background:#111827;
-            padding:20px;
-            border-radius:12px;
-            border:1px solid #1f2937;
-            transition:0.2s;
+        /* PROJECT */
+        .project{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-bottom:35px;
+
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(77,163,255,0.2);
+            border-radius:16px;
+            overflow:hidden;
+
+            min-height:220px;
         }
 
-        .card:hover{
-            border-color:#00ff88;
-            transform:translateY(-5px);
+        .project.reverse{
+            flex-direction:row-reverse;
         }
+
+        .project img{
+            width:45%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .content{
+            width:55%;
+            padding:30px;
+        }
+
+        .content h2{
+            margin:0;
+            font-size:28px;
+            color:#4da3ff;
+        }
+
+        .content p{
+            margin-top:12px;
+            opacity:0.8;
+            line-height:1.6;
+        }
+
+        /* TAGS */
+        .tags{
+            margin-top:12px;
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+        }
+
+        .tag{
+            font-size:12px;
+            padding:5px 10px;
+            border-radius:999px;
+            background:rgba(124,58,237,0.2);
+            border:1px solid rgba(124,58,237,0.4);
+        }
+
+        /* BUTTON */
+        .btn{
+            margin-top:14px;
+            display:inline-block;
+            padding:10px 14px;
+            border-radius:10px;
+            font-size:13px;
+            text-decoration:none;
+            color:white;
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+        }
+
+        .btn:hover{ transform:scale(1.05); }
+
+        /* LIGHT FIX TEXT */
+        body.light .content,
+        body.light p,
+        body.light .tag{
+            color:#111;
+        }
+
+        body.light .project{
+            background:rgba(255,255,255,0.7);
+            border:1px solid rgba(0,0,0,0.1);
+        }
+
     </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-    <h3 style="color:#4da3ff;">DEV PORTFOLIO</h3>
+<div class="top-controls">
+    <label class="switch">
+        <span class="icon">🌙</span>
+        <input type="checkbox" id="themeToggle" checked>
+        <span class="slider"></span>
+    </label>
+</div>
 
+<div class="sidebar">
+    <h3>DEV PORTFOLIO</h3>
     <a href="index.html">Home</a>
-    <a href="info.html">Info</a>
     <a href="project.html">Projects</a>
+    <a href="info.html">Info</a>
+
 </div>
 
 <main>
-    <h1>Projets</h1>
 
-    <div class="grid">
-        <div class="card">Unreal FPS System</div>
-        <div class="card">Unity Physics Engine</div>
-        <div class="card">C++ Game Framework</div>
-        <div class="card">AI NPC System</div>
+    <h1>Projects</h1>
+
+    <!-- 1 -->
+    <div class="project">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f">
+        <div class="content">
+            <h2>Project One</h2>
+            <p>Gameplay system prototype focused on combat feel and responsiveness.</p>
+            <div class="tags"><span class="tag">Unreal</span><span class="tag">C++</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
     </div>
+
+    <!-- 2 -->
+    <div class="project reverse">
+        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d">
+        <div class="content">
+            <h2>Project Two</h2>
+            <p>Enemy AI system with behavior trees and dynamic reactions.</p>
+            <div class="tags"><span class="tag">AI</span><span class="tag">Systems</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="project">
+        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1">
+        <div class="content">
+            <h2>Project Three</h2>
+            <p>Movement system inspired by fast-paced action games.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="project reverse">
+        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f">
+        <div class="content">
+            <h2>Project Four</h2>
+            <p>Multiplayer prototype with synchronized gameplay states.</p>
+            <div class="tags"><span class="tag">Networking</span><span class="tag">C++</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="project">
+        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e">
+        <div class="content">
+            <h2>Project Five</h2>
+            <p>Interactive level design focused on exploration.</p>
+            <div class="tags"><span class="tag">Level Design</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="project reverse">
+        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
+        <div class="content">
+            <h2>Project Six</h2>
+            <p>RPG combat system with progression mechanics.</p>
+            <div class="tags"><span class="tag">RPG</span><span class="tag">Systems</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="project">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+        <div class="content">
+            <h2>Project Seven</h2>
+            <p>Animation system integration for gameplay feedback.</p>
+            <div class="tags"><span class="tag">Animation</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="project reverse">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f">
+        <div class="content">
+            <h2>Project Eight</h2>
+            <p>Final year project combining all systems.</p>
+            <div class="tags"><span class="tag">Unreal</span><span class="tag">Final</span></div>
+            <a class="btn" href="#">View Project</a>
+        </div>
+    </div>
+
 </main>
+
+<script>
+    document.getElementById("themeToggle").addEventListener("change", function(){
+        document.body.classList.toggle("light", !this.checked);
+    });
+</script>
 
 </body>
 </html>
