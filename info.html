@@ -19,13 +19,6 @@
             background-attachment:fixed;
         }
 
-        body.light{
-            color:#111;
-            background:
-                    linear-gradient(rgba(245,245,245,0.95), rgba(235,235,235,0.95)),
-                    url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
-        }
-
         body::after{
             content:"";
             position:fixed;
@@ -48,97 +41,75 @@
             z-index:1;
         }
 
-        /* SIDEBAR */
+        main, .sidebar{
+            position:relative;
+            z-index:2;
+        }
+
         .sidebar{
             position:fixed;
             left:0;
             top:0;
             height:100vh;
             width:220px;
-            background:rgba(10,15,25,0.75);
-            backdrop-filter: blur(12px);
+            background:rgba(10,15,25,0.85);
+            backdrop-filter: blur(14px);
             border-right:1px solid rgba(77,163,255,0.25);
             padding:20px;
             display:flex;
             flex-direction:column;
-            gap:12px;
-            z-index:2;
         }
 
-        .sidebar h3{ color:#4da3ff; }
+        .sidebar h3{
+            font-size:26px;
+            margin-bottom:35px;
+            text-align:center;
+            letter-spacing:2px;
+            background: linear-gradient(90deg, #ffffff, #4da3ff);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
 
-        .sidebar a{
+        .nav{
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+        }
+
+        .nav a{
+            position:relative;
             color:white;
             text-decoration:none;
-            padding:10px;
-            border-radius:8px;
+            padding:12px 14px;
+            border-radius:10px;
+            transition:0.25s;
         }
 
-        .sidebar a:hover{
-            background:rgba(77,163,255,0.15);
-        }
-
-        /* SWITCH */
-        .top-controls{
-            position:fixed;
-            top:15px;
-            right:15px;
-            z-index:10;
-        }
-
-        .switch{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            width:90px;
-            padding:5px 8px;
-            border-radius:999px;
-            background:rgba(255,255,255,0.06);
-            border:1px solid rgba(255,255,255,0.25);
-        }
-
-        .switch input{ display:none; }
-
-        .slider{
-            width:28px;
-            height:14px;
-            background:rgba(255,255,255,0.25);
-            border-radius:999px;
-            position:relative;
-        }
-
-        .slider::before{
+        .nav a::before{
             content:"";
             position:absolute;
-            width:10px;
-            height:10px;
-            top:2px;
-            left:2px;
-            background:white;
-            border-radius:50%;
-            transition:0.3s;
+            inset:0;
+            width:0%;
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            opacity:0.15;
+            transition:0.25s;
         }
 
-        input:checked + .slider::before{
-            transform:translateX(14px);
+        .nav a:hover::before{ width:100%; }
+
+        .nav a.active{
+            background:rgba(77,163,255,0.18);
+            border:1px solid rgba(77,163,255,0.4);
         }
 
-        input:checked + .slider{
-            background:#4da3ff;
-        }
-
-        /* MAIN */
         main{
             margin-left:240px;
             padding:80px 40px;
-            position:relative;
-            z-index:2;
         }
 
-        /* HERO */
         .hero{
             text-align:center;
-            margin-bottom:40px;
+            margin-bottom:20px;
         }
 
         .hero h1{
@@ -149,70 +120,80 @@
             -webkit-text-fill-color:transparent;
         }
 
-        body.light .hero h1{
-            -webkit-text-fill-color:initial;
-            color:#2b2b2b;
+        .profile{
+            display:flex;
+            justify-content:center;
+            margin:25px 0 40px;
         }
 
-        .subtitle{
-            opacity:0.7;
+        .profile img{
+            width:150px;
+            height:150px;
+            border-radius:50%;
+            object-fit:cover;
+            border:3px solid rgba(77,163,255,0.7);
+            box-shadow:0 25px 70px rgba(0,0,0,0.6);
+            transition:transform 0.3s ease;
         }
 
-        /* GRID */
+        .profile img:hover{
+            transform:scale(1.2);
+        }
+
         .grid{
             display:grid;
             grid-template-columns:1fr 1fr;
             gap:30px;
-            align-items:start;
+            align-items:stretch;
         }
 
-        /* CARD */
         .card{
             padding:30px;
             border-radius:18px;
             background:rgba(255,255,255,0.05);
             border:1px solid rgba(77,163,255,0.2);
-        }
-
-        /* DESC STYLE LIKE INDEX */
-        .desc{
-            background:rgba(255,255,255,0.04);
-            border:1px solid rgba(255,255,255,0.10);
-            padding:22px;
-            border-radius:14px;
-            backdrop-filter: blur(10px);
-
-            font-size:14px;
-            line-height:1.75;
-
             display:flex;
             flex-direction:column;
-            gap:14px;
+            justify-content:space-between;
         }
 
-        .desc div{
-            position:relative;
-            padding-left:18px;
-            opacity:0.9;
+        .section-title{
+            font-size:18px;
+            margin-bottom:20px;
+            font-weight:600;
+            letter-spacing:1px;
+            display:inline-block;
+            padding-bottom:6px;
+            border-bottom:2px solid rgba(77,163,255,0.5);
         }
 
-        .desc div::before{
-            content:"";
-            position:absolute;
-            left:0;
-            top:6px;
-            width:4px;
-            height:70%;
-            background:linear-gradient(#4da3ff, #7c3aed);
-            border-radius:10px;
+        .about-content{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+            font-size:14px;
+            line-height:1.7;
         }
 
-        /* SKILLS */
+        .about-content p{
+            margin:0;
+        }
+
+        .skills-group{
+            margin-bottom:20px;
+        }
+
+        .skills-group-title{
+            font-size:12px;
+            opacity:0.6;
+            margin-bottom:10px;
+            letter-spacing:1px;
+        }
+
         .skills{
             display:flex;
             flex-wrap:wrap;
             gap:10px;
-            margin-top:10px;
         }
 
         .skill{
@@ -223,9 +204,8 @@
             font-size:13px;
         }
 
-        /* CENTER LINKS BLOCK */
         .links-wrapper{
-            grid-column: span 2;
+            grid-column:span 2;
             display:flex;
             justify-content:center;
         }
@@ -235,7 +215,6 @@
             max-width:700px;
         }
 
-        /* BUTTONS */
         .links{
             display:grid;
             grid-template-columns:1fr 1fr;
@@ -243,119 +222,47 @@
             margin-top:20px;
         }
 
-        /* fancy button */
         .fancy-btn{
-            position:relative;
-            padding:20px;
-            border-radius:16px;
+            padding:18px;
+            border-radius:14px;
             text-decoration:none;
             color:white;
-            font-size:15px;
-            overflow:hidden;
-
             background:rgba(255,255,255,0.05);
             border:1px solid rgba(255,255,255,0.1);
-
-            transition:0.3s;
-        }
-
-        .fancy-btn span{
-            font-size:12px;
-            opacity:0.6;
+            transition:0.25s;
+            text-align:center;
+            cursor:pointer;
+            position:relative;
+            overflow:hidden;
         }
 
         .fancy-btn::before{
             content:"";
             position:absolute;
             inset:0;
-            border-radius:16px;
-            padding:1px;
             background:linear-gradient(120deg,#4da3ff,#7c3aed,#4da3ff);
-            -webkit-mask:
-                    linear-gradient(#000 0 0) content-box,
-                    linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity:0.4;
+            opacity:0;
+            transition:0.3s;
         }
 
         .fancy-btn:hover{
-            transform:translateY(-5px) scale(1.02);
-            box-shadow:0 15px 40px rgba(77,163,255,0.3);
+            transform:translateY(-6px);
+            box-shadow:0 20px 60px rgba(77,163,255,0.25);
         }
 
-        /* CV */
+        .fancy-btn:hover::before{
+            opacity:0.2;
+        }
+
+        .center-btn{
+            grid-column:1 / -1;
+            justify-self:center;
+            width:50%;
+        }
+
         .cv-btn{
-            grid-column:span 2;
-            text-align:center;
+            grid-column:1 / -1;
             background:linear-gradient(90deg,#4da3ff,#7c3aed);
-            font-weight:bold;
-        }
-
-        /* MODAL */
-        .modal{
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,0.7);
-            display:none;
-            align-items:center;
-            justify-content:center;
-            z-index:20;
-        }
-
-        .modal-content{
-            background:#0f172a;
-            padding:35px;
-            border-radius:18px;
-            display:flex;
-            flex-direction:column;
-            gap:20px;
-            align-items:center;
-            border:1px solid rgba(77,163,255,0.3);
-        }
-
-        /* CV BUTTONS */
-        .cv-options{
-            display:flex;
-            gap:20px;
-        }
-
-        .cv-choice{
-            padding:14px 24px;
-            border-radius:12px;
-            cursor:pointer;
-            font-weight:bold;
-            border:none;
-            transition:0.25s;
-        }
-
-        .cv-fr{ background:#4da3ff; color:white; }
-        .cv-en{ background:#7c3aed; color:white; }
-
-        .cv-choice:hover{
-            transform:scale(1.1);
-        }
-
-        /* CANCEL FIX HOVER */
-        .cv-cancel{
-            margin-top:5px;
-            background:transparent;
-            border:1px solid rgba(255,255,255,0.3);
-            color:white;
-            padding:10px 20px;
-            border-radius:10px;
-            cursor:pointer;
-            transition:0.25s;
-        }
-
-        .cv-cancel:hover{
-            background:rgba(255,255,255,0.08);
-            border-color:rgba(255,255,255,0.6);
-            transform:scale(1.05);
-        }
-
-        .modal.show{
-            display:flex;
         }
 
     </style>
@@ -363,73 +270,125 @@
 
 <body>
 
-<div class="top-controls">
-    <label class="switch">
-        <span>🌙</span>
-        <input type="checkbox" id="themeToggle" checked>
-        <span class="slider"></span>
-    </label>
-</div>
-
 <div class="sidebar">
-    <h3>DEV PORTFOLIO</h3>
-    <a href="index.html">Home</a>
-    <a href="project.html">Projects</a>
-    <a href="info.html">Info</a>
+    <h3>Portfolio</h3>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="project.html">Projects</a>
+        <a class="active" href="info.html">Info</a>
+    </div>
 </div>
 
 <main>
 
     <div class="hero">
-        <h1>About Me</h1>
-        <div class="subtitle">Gameplay Programmer • Systems • Design</div>
+        <div class="hero-subtitle">Gameplay Programmer • ARTFX Student</div>
+    <h1>About Me</h1>
+    </div>
+
+    <style>
+        .hero{
+            text-align:center;
+            margin-bottom:40px;
+            padding:20px 0;
+        }
+
+        .hero-subtitle{
+            font-size:14px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            opacity:0.7;
+            margin-bottom:10px;
+            color:rgba(255,255,255,0.75);
+        }
+
+        body.light .hero-subtitle{
+            color:rgba(0,0,0,0.6);
+        }
+    </style>
+    </div>
+
+    <div class="profile">
+        <img src="images/ProfilePicture.jpg" alt="profile">
     </div>
 
     <div class="grid">
 
         <div class="card">
-            <h2>About</h2>
+            <div class="section-title">About</div>
 
-            <div class="desc">
-                <div>I build gameplay systems that feel responsive and satisfying.</div>
-                <div>I focus on combat, AI systems and player movement.</div>
-                <div>I like emergent gameplay and systemic design.</div>
-                <div>My goal is to create strong game feel experiences.</div>
+            <div class="about-content">
+                <p>I’m a 5th-year student at ARTFX specializing in gameplay programming for video games, with a strong focus on building engaging and responsive player experiences.</p>
+                <p>Passionate about competitive gaming, MOBAs, and sandbox experiences, I enjoy designing systems that encourage creativity, mastery, and emergent gameplay.</p>
+                <p>I have solid experience working with Unreal Engine and Unity, using both C++ and C# to develop gameplay features and systems.</p>
+                <p>I’m also inspired by Chinese and Korean culture, which often influences my approach to aesthetics, design, and worldbuilding.</p>
+                <p>My goal is to keep improving as a gameplay programmer and to create meaningful, engaging experiences for players.</p>
             </div>
-
         </div>
 
         <div class="card">
-            <h2>Skills</h2>
-            <div class="skills">
-                <div class="skill">Unreal</div>
-                <div class="skill">Unity</div>
-                <div class="skill">C++</div>
-                <div class="skill">C#</div>
-                <div class="skill">AI</div>
+            <div class="section-title">Skills</div>
+
+            <div class="skills-group">
+                <div class="skills-group-title">ENGINE</div>
+                <div class="skills">
+                    <div class="skill">Unreal Engine</div>
+                    <div class="skill">Unity</div>
+                </div>
             </div>
+
+            <div class="skills-group">
+                <div class="skills-group-title">PROGRAMMING</div>
+                <div class="skills">
+                    <div class="skill">C++</div>
+                    <div class="skill">C#</div>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <div class="skills-group-title">GAME SYSTEMS</div>
+                <div class="skills">
+                    <div class="skill">AI Systems</div>
+                    <div class="skill">Modular Systems</div>
+                    <div class="skill">GPE Programming</div>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <div class="skills-group-title">TOOLS</div>
+                <div class="skills">
+                    <div class="skill">GitHub</div>
+                    <div class="skill">Perforce</div>
+                    <div class="skill">Raylib</div>
+                    <div class="skill">ImGui</div>
+                    <div class="skill">JetBrains Rider</div>
+                    <div class="skill">Visual Studio</div>
+                </div>
+            </div>
+
         </div>
 
         <div class="links-wrapper">
             <div class="card links-card">
-                <h2>Links</h2>
+
+                <div class="section-title">Links</div>
 
                 <div class="links">
-                    <a class="fancy-btn" href="https://linkedin.com" target="_blank">
-                        LinkedIn <span>Profile</span>
+
+                    <a class="fancy-btn" href="https://www.linkedin.com/in/anthonin-kadi-4980b7262/" target="_blank">
+                        💼 LinkedIn
                     </a>
 
-                    <a class="fancy-btn" href="https://itch.io" target="_blank">
-                        Itch.io <span>Games</span>
+                    <a class="fancy-btn" href="https://anthoninkadi.itch.io/" target="_blank">
+                        🎮 Itch.io
                     </a>
 
-                    <a class="fancy-btn" href="https://github.com" target="_blank">
-                        GitHub <span>Code</span>
+                    <a class="fancy-btn center-btn" href="https://github.com/AnthoninKADI" target="_blank">
+                        💻 GitHub
                     </a>
 
-                    <div class="fancy-btn cv-btn" onclick="openModal()">
-                        Download CV <span>FR / EN</span>
-                    </div>
+                    <div class="fancy-btn cv-btn">Download CV</div>
+
                 </div>
 
             </div>
@@ -438,40 +397,6 @@
     </div>
 
 </main>
-
-<!-- MODAL -->
-<div class="modal" id="cvModal">
-    <div class="modal-content">
-        <h3>Download CV</h3>
-
-        <div class="cv-options">
-            <button class="cv-choice cv-fr" onclick="downloadCV('fr')">🇫🇷 Français</button>
-            <button class="cv-choice cv-en" onclick="downloadCV('en')">🇬🇧 English</button>
-        </div>
-
-        <button class="cv-cancel" onclick="closeModal()">Cancel</button>
-    </div>
-</div>
-
-<script>
-
-    document.getElementById("themeToggle").addEventListener("change", function(){
-        document.body.classList.toggle("light", !this.checked);
-    });
-
-    function openModal(){
-        document.getElementById("cvModal").classList.add("show");
-    }
-
-    function closeModal(){
-        document.getElementById("cvModal").classList.remove("show");
-    }
-
-    function downloadCV(lang){
-        window.location.href = (lang === "fr") ? "cv_fr.pdf" : "cv_en.pdf";
-    }
-
-</script>
 
 </body>
 </html>
