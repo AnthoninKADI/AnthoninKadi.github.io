@@ -268,12 +268,38 @@
       transform:scale(1.05);
     }
 
+    /* CAROUSEL */
     .project-image{
+      position:relative;
       min-height:520px;
-      background:
-              linear-gradient(135deg, rgba(124,58,237,0.35), rgba(77,163,255,0.35)),
-              url("images/anotherworld1.gif") center/cover no-repeat;
+      background-size:cover;
+      background-position:center;
     }
+
+    .arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:22px;
+      background:rgba(0,0,0,0.5);
+      border:1px solid rgba(255,255,255,0.3);
+      width:40px;
+      height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      cursor:pointer;
+      transition:0.25s;
+      user-select:none;
+    }
+
+    .arrow:hover{
+      background:rgba(77,163,255,0.6);
+    }
+
+    .arrow.left{ left:12px; }
+    .arrow.right{ right:12px; }
 
   </style>
 </head>
@@ -343,11 +369,41 @@
 
     </div>
 
-    <div class="project-image"></div>
+    <div class="project-image"
+         data-images="images/anotherworld1.gif,images/anotherworld2.png,images/anotherworld3.png">
+
+      <div class="arrow left" onclick="changeSlide(this, -1)">❮</div>
+      <div class="arrow right" onclick="changeSlide(this, 1)">❯</div>
+
+    </div>
 
   </div>
 
 </main>
+
+<script>
+  function changeSlide(el, direction){
+    const container = el.parentElement;
+    let images = container.dataset.images.split(",");
+    let index = container.dataset.index ? parseInt(container.dataset.index) : 0;
+
+    index += direction;
+
+    if(index < 0) index = images.length - 1;
+    if(index >= images.length) index = 0;
+
+    container.style.backgroundImage = `url(${images[index]})`;
+    container.dataset.index = index;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".project-image").forEach(el => {
+      const images = el.dataset.images.split(",");
+      el.style.backgroundImage = `url(${images[0]})`;
+      el.dataset.index = 0;
+    });
+  });
+</script>
 
 </body>
 </html>

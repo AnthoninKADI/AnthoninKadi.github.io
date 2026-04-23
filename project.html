@@ -40,7 +40,6 @@
             z-index:-1;
         }
 
-        /* SIDEBAR */
         .sidebar{
             position:fixed;
             left:0;
@@ -99,13 +98,11 @@
             border:1px solid rgba(77,163,255,0.4);
         }
 
-        /* MAIN */
         main{
             margin-left:240px;
             padding:0 40px 60px;
         }
 
-        /* HEADER */
         .hero-header{
             padding:90px 0 40px;
             text-align:center;
@@ -127,7 +124,6 @@
             font-size:13px;
         }
 
-        /* FILTERS */
         .filters{
             position:sticky;
             top:0;
@@ -166,7 +162,6 @@
             background:linear-gradient(90deg,#4da3ff,#7c3aed);
         }
 
-        /* graduation filter */
         .filter-btn.graduation-filter{
             border:1px solid rgba(56,112,176,0.4);
             background:rgba(38,70,112,0.2);
@@ -178,7 +173,6 @@
             color:white;
         }
 
-        /* PROJECTS */
         .projects{
             display:flex;
             flex-direction:column;
@@ -225,7 +219,6 @@
             font-size:14px;
         }
 
-        /* DATE */
         .project-date{
             display:inline-flex;
             align-items:center;
@@ -240,7 +233,6 @@
             color:#bfe3ff;
         }
 
-        /* TAGS */
         .tags{
             display:flex;
             flex-wrap:wrap;
@@ -262,7 +254,6 @@
             color:#4da3ff;
         }
 
-        /* LINK */
         .project-link{
             margin-top:12px;
             padding:10px 16px;
@@ -280,10 +271,30 @@
             box-shadow:0 15px 40px rgba(77,163,255,0.25);
         }
 
-        .project-image{
-            background-size:850px;
-            background-position:center;
+        .carousel{
+            position:relative;
+            width:100%;
+            height:100%;
         }
+
+        .carousel img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .arrow{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            font-size:22px;
+            background:rgba(0,0,0,0.4);
+            padding:10px 14px;
+            cursor:pointer;
+        }
+
+        .arrow.left{ left:10px; }
+        .arrow.right{ right:10px; }
 
     </style>
 </head>
@@ -322,12 +333,12 @@
 
     <div class="projects">
 
+        <!-- 1 -->
         <div class="project" data-tags="C++ Unreal Engine 3D Group Project Graduation Project">
             <div class="project-content">
                 <h3>F*ck This Job</h3>
                 <div class="project-date">📅 March 2025 → May 2026</div>
                 <p>[WIP]</p>
-
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
@@ -335,30 +346,41 @@
                     <span class="tag">Group Project</span>
                     <span class="tag graduation">Graduation Project</span>
                 </div>
-
                 <a class="project-link" href="#">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/FTJ1.jpg')"></div>
+            <div class="carousel" data-images="images/FTJ1.jpg,images/FTJ2.jpg,images/FTJ3.jpg,images/FTJ4.jpg,images/FTJ5.jpg">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
 
+        <!-- 2 -->
         <div class="project" data-tags="Unreal Engine 3D Group Project GameJam">
             <div class="project-content">
                 <h3>Sharkour!</h3>
                 <div class="project-date">📅 January 30th 2026 → February 1st 2026</div>
-                <p>???</p>
-
+                <p>Sharkour! is a 3D game developed with Unreal Engine 5 during the 2026 Global Game Jam.
+                    It centers on a unique mask-switching mechanic that drives both exploration and traversal.
+                    Players use different masks, each linked to a specific color, to reveal hidden platforms and navigate the environment.
+                    A special mask, limited by duration and cooldown, allows players to see all platforms at once, adding a layer of timing and strategy.
+                    To intensify the experience, a relentless wall of water filled with sharks constantly chases the player, creating continuous pressure and urgency.</p>
                 <div class="tags">
                     <span class="tag">Unreal Engine</span>
                     <span class="tag">Group Project</span>
                     <span class="tag">3D</span>
                     <span class="tag">GameJam</span>
                 </div>
-
                 <a class="project-link" href="https://anthoninkadi.itch.io/sharkour">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?2')"></div>
+            <div class="carousel" data-images="images/Sharkour.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
 
+        <!-- 3 -->
         <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
             <div class="project-content">
                 <h3>Another World Remake</h3>
@@ -368,25 +390,27 @@
                     Players, trapped by an alien civilization, must escape with another prisoner using a weapon
                     that fires lasers and creates energy shields.
                     The game blends third-person action and puzzle-solving while staying true to the original experience.</p>
-
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
                     <span class="tag">3D</span>
                     <span class="tag">Group Project</span>
                 </div>
-
                 <a class="project-link" href="https://artfx-school.itch.io/another-world-reloaded">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/anotherworld1.gif')"></div>
+            <div class="carousel" data-images="images/anotherworld1.gif,images/anotherworld2.png,images/anotherworld3.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
-
+        <!-- 4 -->
         <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
             <div class="project-content">
                 <h3>Slime 64</h3>
                 <div class="project-date">📅 2024</div>
-                <p>Slime 64 is a student project created in just one week with Unreal Engine and C++. 
-                    Inspired by Mario 64, it features a slime exploring a colorful 3D world. 
+                <p>Slime 64 is a student project created in just one week with Unreal Engine and C++.
+                    Inspired by Mario 64, it features a slime exploring a colorful 3D world.
                     All visuals were handmade using Paint or directly in Unreal, giving the project a simple yet unique identity</p>
 
                 <div class="tags">
@@ -398,9 +422,13 @@
 
                 <a class="project-link" href="https://anthoninkadi.itch.io/slime64">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/Slime1.jpg')"></div>
+            <div class="carousel" data-images="images/Slime1.jpg,images/Slime2.jpg,images/Slime3.jpg">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
-
+        <!-- 5 -->
         <div class="project" data-tags="C++ Unreal Engine 2.5D Group Project">
             <div class="project-content">
                 <h3>La Vengeance de Metella</h3>
@@ -419,17 +447,21 @@
 
                 <a class="project-link" href="https://artfx-school.itch.io/metella">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/Metella1.png')"></div>
+            <div class="carousel" data-images="images/Metella1.png,images/Metella2.png,images/Metella3.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
-
+        <!-- 6 -->
         <div class="project" data-tags="C# Unity 2.5D Group Project">
             <div class="project-content">
                 <h3>A Light Seeker</h3>
                 <div class="project-date">📅 2023</div>
-                <p>A 2.5D Unity game developed in a team over 1.5 months. 
-                    The player follows a mysterious scream and encounters strange objects and unusual locations, 
-                    uncovering a new clue at each level that drives the story forward. 
-                    The adventure combines exploration and puzzles, 
+                <p>A 2.5D Unity game developed in a team over 1.5 months.
+                    The player follows a mysterious scream and encounters strange objects and unusual locations,
+                    uncovering a new clue at each level that drives the story forward.
+                    The adventure combines exploration and puzzles,
                     creating an immersive and captivating experience that draws the player into its mysterious world.</p>
 
                 <div class="tags">
@@ -441,15 +473,19 @@
 
                 <a class="project-link" href="https://anthoninkadi.itch.io/alightseeker">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/LightSeeker1.png')"></div>
+            <div class="carousel" data-images="images/LightSeeker1.png,images/LightSeeker5.png,images/LightSeeker2.png,images/LightSeeker3.png,images/LightSeeker4.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
-
+        <!-- 7 -->
         <div class="project" data-tags="C# Unity 2D Group Project">
             <div class="project-content">
                 <h3>Blitzer</h3>
                 <div class="project-date">📅 2022</div>
-                <p>Blitzer is a 2D game developed with Unity in six weeks as a student team project. 
-                    You play as an Allied spy with supernatural powers on a mission to recover documents linked to the Enigma machine, 
+                <p>Blitzer is a 2D game developed with Unity in six weeks as a student team project.
+                    You play as an Allied spy with supernatural powers on a mission to recover documents linked to the Enigma machine,
                     infiltrating enemy bases and escaping a sinking submarine in a mix of stealth and action.</p>
 
                 <div class="tags">
@@ -461,15 +497,19 @@
 
                 <a class="project-link" href="https://anthoninkadi.itch.io/blitzer">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/Blitzer1.png')"></div>
-        </div>
 
+            <div class="carousel" data-images="images/Blitzer1.png,images/Blitzer2.png,images/Blitzer3.png,images/Blitzer4.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
+        </div>
         <div class="project" data-tags="C# Unity 2D Solo">
             <div class="project-content">
                 <h3>Dungeon Escape</h3>
                 <div class="project-date">📅 2022</div>
-                <p>Dungeon Escape is a 2D pixel art game developed with Unity as a first-year group project by three students (two artists and one programmer) 
-                    over two weeks. Players must collect 10 coins and defeat all the monsters in the level to face the final boss. 
+                <p>Dungeon Escape is a 2D pixel art game developed with Unity as a first-year group project by three students (two artists and one programmer)
+                    over two weeks. Players must collect 10 coins and defeat all the monsters in the level to face the final boss.
                     The game combines fast-paced combat, exploration, and classic retro aesthetics in a challenging dungeon environment.</p>
 
                 <div class="tags">
@@ -480,15 +520,19 @@
 
                 <a class="project-link" href="https://anthoninkadi.itch.io/dungeon-escape">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/DungeonEscape1.png')"></div>
+            <div class="carousel" data-images="images/DungeonEscape1.png,images/DungeonEscape6.png,images/DungeonEscape2.png,images/DungeonEscape3.png,images/DungeonEscape4.png,images/DungeonEscape5.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
-
+        <!-- 9 -->
         <div class="project" data-tags="C# Unity 2D Group Project">
             <div class="project-content">
                 <h3>Sand Wars</h3>
                 <div class="project-date">📅 2022</div>
-                <p>Sand Wars is a 2D shooter developed with Unity by two students (artist and programmer). 
-                    Set in the Star Wars universe, players must survive waves of enemies, 
+                <p>Sand Wars is a 2D shooter developed with Unity by two students (artist and programmer).
+                    Set in the Star Wars universe, players must survive waves of enemies,
                     testing their reflexes and precision in fast-paced combat.</p>
 
                 <div class="tags">
@@ -500,14 +544,72 @@
 
                 <a class="project-link" href="https://anthoninkadi.itch.io/sand-wars">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('images/SandWars1.png')"></div>
+            <div class="carousel" data-images="images/SandWars1.png,images/SandWars2.png">
+                <div class="arrow left" onclick="prev(this)">❮</div>
+                <img src="">
+                <div class="arrow right" onclick="next(this)">❯</div>
+            </div>
         </div>
-
+        
+        
+        
+        
+        
     </div>
 
 </main>
 
 <script>
+
+    function setupCarousels(){
+        document.querySelectorAll(".carousel").forEach(c => {
+            const imgs = c.dataset.images.split(",");
+            c.dataset.index = 0;
+            c.querySelector("img").src = imgs[0];
+        });
+    }
+
+    function next(el){
+        const c = el.parentElement;
+        const imgs = c.dataset.images.split(",");
+        let i = parseInt(c.dataset.index);
+        i = (i + 1) % imgs.length;
+        c.dataset.index = i;
+        c.querySelector("img").src = imgs[i];
+    }
+
+    function prev(el){
+        const c = el.parentElement;
+        const imgs = c.dataset.images.split(",");
+        let i = parseInt(c.dataset.index);
+        i = (i - 1 + imgs.length) % imgs.length;
+        c.dataset.index = i;
+        c.querySelector("img").src = imgs[i];
+    }
+
+    function updateArrows(){
+        document.querySelectorAll(".project").forEach(p => {
+            const carousel = p.querySelector(".carousel");
+            if(!carousel) return;
+
+            const left = carousel.querySelector(".arrow.left");
+            const right = carousel.querySelector(".arrow.right");
+
+            if(p.classList.contains("reverse")){
+                left.style.left = "auto";
+                left.style.right = "10px";
+
+                right.style.right = "auto";
+                right.style.left = "10px";
+            } else {
+                left.style.left = "10px";
+                left.style.right = "auto";
+
+                right.style.right = "10px";
+                right.style.left = "auto";
+            }
+        });
+    }
 
     function filterProjects(tag, btn){
 
@@ -535,6 +637,7 @@
 
         });
 
+        updateArrows();
     }
 
     window.addEventListener("scroll", () => {
@@ -543,7 +646,9 @@
     });
 
     window.addEventListener("DOMContentLoaded", () => {
+        setupCarousels();
         filterProjects("all", document.querySelector(".filter-btn"));
+        updateArrows();
     });
 
 </script>
