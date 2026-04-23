@@ -15,11 +15,9 @@
                     linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.92)),
                     url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
             background-attachment:fixed;
-
             position:relative;
         }
 
-        /* FIX BLUR BUG (IMPORTANT) */
         body::after{
             content:"";
             position:fixed;
@@ -168,6 +166,18 @@
             background:linear-gradient(90deg,#4da3ff,#7c3aed);
         }
 
+        /* graduation filter */
+        .filter-btn.graduation-filter{
+            border:1px solid rgba(56,112,176,0.4);
+            background:rgba(38,70,112,0.2);
+            color:#4da3ff;
+        }
+
+        .filter-btn.graduation-filter.active{
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            color:white;
+        }
+
         /* PROJECTS */
         .projects{
             display:flex;
@@ -244,11 +254,34 @@
             border-radius:999px;
             background:rgba(255,255,255,0.08);
             border:1px solid rgba(255,255,255,0.15);
-            opacity:0.9;
+        }
+
+        .tag.graduation{
+            background:rgba(38,70,112,0.2);
+            border:1px solid rgba(56,112,176,0.4);
+            color:#4da3ff;
+        }
+
+        /* LINK */
+        .project-link{
+            margin-top:12px;
+            padding:10px 16px;
+            border-radius:10px;
+            width:fit-content;
+            font-size:13px;
+            text-decoration:none;
+            color:white;
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            transition:0.25s;
+        }
+
+        .project-link:hover{
+            transform:translateY(-4px);
+            box-shadow:0 15px 40px rgba(77,163,255,0.25);
         }
 
         .project-image{
-            background-size:cover;
+            background-size:850px;
             background-position:center;
         }
 
@@ -282,127 +315,192 @@
         <div class="filter-btn" onclick="filterProjects('3D', this)">3D</div>
         <div class="filter-btn" onclick="filterProjects('2D', this)">2D</div>
         <div class="filter-btn" onclick="filterProjects('2.5D', this)">2.5D</div>
+        <div class="filter-btn" onclick="filterProjects('GameJam', this)">GameJam</div>
         <div class="filter-btn" onclick="filterProjects('Group Project', this)">Group Project</div>
+        <div class="filter-btn graduation-filter" onclick="filterProjects('Graduation Project', this)">Graduation Project</div>
     </div>
 
     <div class="projects">
 
-        <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
+        <div class="project" data-tags="C++ Unreal Engine 3D Group Project Graduation Project">
             <div class="project-content">
-                <h3>Another World Remake</h3>
-                <div class="project-date">📅 2024 → 2025</div>
-                <p>3D Unreal Engine remake of the classic prison escape section.</p>
+                <h3>F*ck This Job</h3>
+                <div class="project-date">📅 March 2025 → May 2026</div>
+                <p>[WIP]</p>
+
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
                     <span class="tag">3D</span>
                     <span class="tag">Group Project</span>
+                    <span class="tag graduation">Graduation Project</span>
                 </div>
+
+                <a class="project-link" href="#">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?1')"></div>
+            <div class="project-image" style="background-image:url('images/FTJ1.jpg')"></div>
         </div>
 
-        <div class="project" data-tags="C# Unity 2D Group Project">
+        <div class="project" data-tags="Unreal Engine 3D Group Project GameJam">
             <div class="project-content">
-                <h3>Unity 2D System</h3>
-                <div class="project-date">📅 2023</div>
-                <p>2D gameplay prototype focused on core mechanics.</p>
+                <h3>Sharkour!</h3>
+                <div class="project-date">📅 January 30th 2026 → February 1st 2026</div>
+                <p>???</p>
+
                 <div class="tags">
-                    <span class="tag">C#</span>
-                    <span class="tag">Unity</span>
-                    <span class="tag">2D</span>
+                    <span class="tag">Unreal Engine</span>
                     <span class="tag">Group Project</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">GameJam</span>
                 </div>
+
+                <a class="project-link" href="https://anthoninkadi.itch.io/sharkour">Project Link</a>
             </div>
             <div class="project-image" style="background-image:url('https://picsum.photos/800/600?2')"></div>
         </div>
 
+        <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
+            <div class="project-content">
+                <h3>Another World Remake</h3>
+                <div class="project-date">📅 2024</div>
+                <p>Another World Remake is a 3D game developed with Unreal Engine as a first-year group project.
+                    It recreates the prison section of Eric Chahi’s classic Another World in 3D.
+                    Players, trapped by an alien civilization, must escape with another prisoner using a weapon
+                    that fires lasers and creates energy shields.
+                    The game blends third-person action and puzzle-solving while staying true to the original experience.</p>
+
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+
+                <a class="project-link" href="https://artfx-school.itch.io/another-world-reloaded">Project Link</a>
+            </div>
+            <div class="project-image" style="background-image:url('images/anotherworld1.gif')"></div>
+        </div>
+
+        <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
+            <div class="project-content">
+                <h3>Slime 64</h3>
+                <div class="project-date">📅 2024</div>
+                <p>Slime 64 is a student project created in just one week with Unreal Engine and C++. 
+                    Inspired by Mario 64, it features a slime exploring a colorful 3D world. 
+                    All visuals were handmade using Paint or directly in Unreal, giving the project a simple yet unique identity</p>
+
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+
+                <a class="project-link" href="https://anthoninkadi.itch.io/slime64">Project Link</a>
+            </div>
+            <div class="project-image" style="background-image:url('images/Slime1.jpg')"></div>
+        </div>
+
         <div class="project" data-tags="C++ Unreal Engine 2.5D Group Project">
             <div class="project-content">
-                <h3>2.5D Prototype</h3>
-                <div class="project-date">📅 2024</div>
-                <p>Mix between 2D gameplay and 3D depth.</p>
+                <h3>La Vengeance de Metella</h3>
+                <div class="project-date">📅 2023</div>
+                <p>La Vengeance de Metella is a 2.5D game developed with Unreal Engine as a group project in collaboration with the Orchestre National de Montpellier.
+                    Players take on the role of Metella, who, jealous of Raoul de Gardefeu’s new conquest,
+                    must deliver an incriminating letter to the Baroness of Gondremarck while avoiding Gardefeu’s companions.
+                    The game blends stealth, strategy, and narrative-driven gameplay in a unique historical setting.</p>
+
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
                     <span class="tag">2.5D</span>
                     <span class="tag">Group Project</span>
                 </div>
+
+                <a class="project-link" href="https://artfx-school.itch.io/metella">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?3')"></div>
+            <div class="project-image" style="background-image:url('images/Metella1.png')"></div>
         </div>
 
-        <div class="project" data-tags="C# Unity 3D Group Project">
+        <div class="project" data-tags="C# Unity 2.5D Group Project">
             <div class="project-content">
-                <h3>Unity 3D System</h3>
-                <div class="project-date">📅 2022 → 2023</div>
-                <p>3D gameplay mechanics prototype built in Unity.</p>
+                <h3>A Light Seeker</h3>
+                <div class="project-date">📅 2023</div>
+                <p>A 2.5D Unity game developed in a team over 1.5 months. 
+                    The player follows a mysterious scream and encounters strange objects and unusual locations, 
+                    uncovering a new clue at each level that drives the story forward. 
+                    The adventure combines exploration and puzzles, 
+                    creating an immersive and captivating experience that draws the player into its mysterious world.</p>
+
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
-                    <span class="tag">3D</span>
+                    <span class="tag">2.5D</span>
                     <span class="tag">Group Project</span>
                 </div>
-            </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?4')"></div>
-        </div>
 
-        <div class="project" data-tags="C++ Unreal Engine 3D Solo">
-            <div class="project-content">
-                <h3>AI System Prototype</h3>
-                <div class="project-date">📅 2023</div>
-                <p>Gameplay AI system with modular behavior.</p>
-                <div class="tags">
-                    <span class="tag">C++</span>
-                    <span class="tag">Unreal Engine</span>
-                    <span class="tag">3D</span>
-                </div>
+                <a class="project-link" href="https://anthoninkadi.itch.io/alightseeker">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?5')"></div>
+            <div class="project-image" style="background-image:url('images/LightSeeker1.png')"></div>
         </div>
 
         <div class="project" data-tags="C# Unity 2D Group Project">
             <div class="project-content">
-                <h3>2D Platform System</h3>
+                <h3>Blitzer</h3>
                 <div class="project-date">📅 2022</div>
-                <p>Platformer system focused on movement feel.</p>
+                <p>Blitzer is a 2D game developed with Unity in six weeks as a student team project. 
+                    You play as an Allied spy with supernatural powers on a mission to recover documents linked to the Enigma machine, 
+                    infiltrating enemy bases and escaping a sinking submarine in a mix of stealth and action.</p>
+
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
                     <span class="tag">2D</span>
                     <span class="tag">Group Project</span>
                 </div>
+
+                <a class="project-link" href="https://anthoninkadi.itch.io/blitzer">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?6')"></div>
+            <div class="project-image" style="background-image:url('images/Blitzer1.png')"></div>
         </div>
 
-        <div class="project" data-tags="C++ Unreal Engine 2.5D Solo">
+        <div class="project" data-tags="C# Unity 2D Solo">
             <div class="project-content">
-                <h3>Combat Prototype</h3>
-                <div class="project-date">📅 2024</div>
-                <p>2.5D combat system with timing mechanics.</p>
-                <div class="tags">
-                    <span class="tag">C++</span>
-                    <span class="tag">Unreal Engine</span>
-                    <span class="tag">2.5D</span>
-                </div>
-            </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?7')"></div>
-        </div>
+                <h3>Dungeon Escape</h3>
+                <div class="project-date">📅 2022</div>
+                <p>Dungeon Escape is a 2D pixel art game developed with Unity as a first-year group project by three students (two artists and one programmer) 
+                    over two weeks. Players must collect 10 coins and defeat all the monsters in the level to face the final boss. 
+                    The game combines fast-paced combat, exploration, and classic retro aesthetics in a challenging dungeon environment.</p>
 
-        <div class="project" data-tags="C# Unity 3D Group Project">
-            <div class="project-content">
-                <h3>Sandbox Prototype</h3>
-                <div class="project-date">📅 2023 → 2024</div>
-                <p>Experimental sandbox gameplay systems.</p>
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
-                    <span class="tag">3D</span>
+                    <span class="tag">2D</span>
+                </div>
+
+                <a class="project-link" href="https://anthoninkadi.itch.io/dungeon-escape">Project Link</a>
+            </div>
+            <div class="project-image" style="background-image:url('images/DungeonEscape1.png')"></div>
+        </div>
+
+        <div class="project" data-tags="C# Unity 2D Group Project">
+            <div class="project-content">
+                <h3>Sand Wars</h3>
+                <div class="project-date">📅 2022</div>
+                <p>Sand Wars is a 2D shooter developed with Unity by two students (artist and programmer). 
+                    Set in the Star Wars universe, players must survive waves of enemies, 
+                    testing their reflexes and precision in fast-paced combat.</p>
+
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">2D</span>
                     <span class="tag">Group Project</span>
                 </div>
+
+                <a class="project-link" href="https://anthoninkadi.itch.io/sand-wars">Project Link</a>
             </div>
-            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?8')"></div>
+            <div class="project-image" style="background-image:url('images/SandWars1.png')"></div>
         </div>
 
     </div>
@@ -417,23 +515,22 @@
         if(btn) btn.classList.add("active");
 
         const projects = document.querySelectorAll(".project");
-        let visibleIndex = 0;
+        let index = 0;
 
-        projects.forEach(project => {
+        projects.forEach(p => {
 
-            const match = tag === "all" || project.dataset.tags.includes(tag);
+            const match = tag === "all" || p.dataset.tags.includes(tag);
 
             if(match){
-                project.style.display = "grid";
-                project.classList.remove("reverse");
+                p.style.display = "grid";
+                p.classList.remove("reverse");
 
-                if(visibleIndex % 2 !== 0){
-                    project.classList.add("reverse");
+                if(index % 2 === 1){
+                    p.classList.add("reverse");
                 }
-
-                visibleIndex++;
+                index++;
             } else {
-                project.style.display = "none";
+                p.style.display = "none";
             }
 
         });
@@ -441,8 +538,8 @@
     }
 
     window.addEventListener("scroll", () => {
-        const filters = document.getElementById("filters");
-        filters.classList.toggle("scrolled", window.scrollY > 10);
+        document.getElementById("filters")
+            .classList.toggle("scrolled", window.scrollY > 10);
     });
 
     window.addEventListener("DOMContentLoaded", () => {
