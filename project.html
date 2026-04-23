@@ -41,6 +41,11 @@
             z-index:1;
         }
 
+        main, .sidebar{
+            position:relative;
+            z-index:2;
+        }
+
         /* SIDEBAR */
         .sidebar{
             position:fixed;
@@ -48,148 +53,166 @@
             top:0;
             height:100vh;
             width:220px;
-            background:rgba(10,15,25,0.75);
-            backdrop-filter: blur(12px);
+            background:rgba(10,15,25,0.85);
+            backdrop-filter: blur(14px);
             border-right:1px solid rgba(77,163,255,0.25);
             padding:20px;
             display:flex;
             flex-direction:column;
-            gap:12px;
-            z-index:2;
         }
 
-        .sidebar h3{ color:#4da3ff; }
+        .sidebar h3{
+            font-size:36px;
+            margin-bottom:35px;
+            text-align:center;
+            letter-spacing:3px;
+            font-weight:700;
+            background: linear-gradient(90deg, #ffffff, #4da3ff);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
 
-        .sidebar a{
+        .nav{
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+        }
+
+        .nav a{
+            position:relative;
             color:white;
             text-decoration:none;
-            padding:10px;
-            border-radius:8px;
+            padding:12px 14px;
+            border-radius:10px;
+            transition:0.25s;
         }
 
-        .sidebar a:hover{
-            background:rgba(77,163,255,0.15);
+        .nav a::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            width:0%;
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+            opacity:0.15;
+            transition:0.25s;
+        }
+
+        .nav a:hover::before{ width:100%; }
+
+        .nav a.active{
+            background:rgba(77,163,255,0.18);
+            border:1px solid rgba(77,163,255,0.4);
         }
 
         /* MAIN */
         main{
             margin-left:240px;
             padding:60px 40px;
-            position:relative;
-            z-index:2;
         }
 
-        h1{
-            font-size:52px;
-            margin-bottom:20px;
+        /* FILTER BAR */
+        .filters{
+            position:sticky;
+            top:0;
+            z-index:10;
+
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+
+            padding:14px 0;
+            margin-bottom:40px;
+
+            transition:0.25s ease;
+        }
+
+        /* ONLY WHEN SCROLLED */
+        .filters.scrolled{
+            background:rgba(10,15,25,0.75);
+            backdrop-filter: blur(12px);
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        /* FILTER BUTTONS */
+        .filter-btn{
+            padding:8px 14px;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,0.2);
+            cursor:pointer;
+            background:rgba(255,255,255,0.05);
+            font-size:13px;
+            transition:0.25s;
+        }
+
+        .filter-btn:hover{
+            transform:translateY(-3px);
+            background:rgba(77,163,255,0.15);
+            border-color:rgba(77,163,255,0.4);
+        }
+
+        .filter-btn.active{
+            background:linear-gradient(90deg,#4da3ff,#7c3aed);
+        }
+
+        /* PROJECTS */
+        .projects{
+            display:flex;
+            flex-direction:column;
+            gap:50px;
+        }
+
+        .project{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            min-height:420px;
+            border-radius:20px;
+            overflow:hidden;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(77,163,255,0.25);
+        }
+
+        .project.reverse{
+            direction:rtl;
+        }
+
+        .project.reverse .project-content{
+            direction:ltr;
+        }
+
+        .project-content{
+            padding:40px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            gap:15px;
+        }
+
+        .project-content h3{
+            margin:0;
+            font-size:28px;
             background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
         }
 
-        /* FILTERS */
-        .filters{
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-            margin-bottom:35px;
+        .project-image{
+            background-size:cover;
+            background-position:center;
         }
 
-        .filter{
-            padding:10px 14px;
-            border-radius:999px;
-            cursor:pointer;
-            font-size:13px;
-
-            background:rgba(255,255,255,0.05);
-            border:1px solid rgba(255,255,255,0.15);
-
-            transition:0.2s;
-        }
-
-        .filter:hover{ transform:scale(1.05); }
-
-        .filter.active{
-            background:linear-gradient(90deg,#4da3ff,#7c3aed);
-            border:none;
-        }
-
-        /* PROJECT */
-        .project{
-            display:flex;
-            margin-bottom:30px;
-
-            background:rgba(255,255,255,0.04);
-            border:1px solid rgba(77,163,255,0.2);
-            border-radius:16px;
-            overflow:hidden;
-
-            min-height:220px;
-        }
-
-        .project:nth-child(even){
-            flex-direction:row-reverse;
-        }
-
-        .project img{
-            width:45%;
-            object-fit:cover;
-        }
-
-        .content{
-            width:55%;
-            padding:30px;
-        }
-
-        .content h2{
-            margin:0;
-            font-size:26px;
-            color:#4da3ff;
-        }
-
-        .content p{
-            opacity:0.8;
-            line-height:1.5;
-        }
-
-        /* TAGS */
         .tags{
-            margin-top:10px;
             display:flex;
             flex-wrap:wrap;
             gap:8px;
         }
 
         .tag{
+            padding:6px 12px;
             font-size:12px;
-            padding:5px 10px;
             border-radius:999px;
-            background:rgba(124,58,237,0.2);
-            border:1px solid rgba(124,58,237,0.4);
-        }
-
-        /* BUTTON */
-        .btn{
-            margin-top:14px;
-            display:inline-block;
-            padding:10px 14px;
-            border-radius:10px;
-            font-size:13px;
-            text-decoration:none;
-            color:white;
-
-            background:linear-gradient(90deg,#4da3ff,#7c3aed);
-            transition:0.2s;
-        }
-
-        .btn:hover{
-            transform:scale(1.05);
-            box-shadow:0 10px 25px rgba(77,163,255,0.3);
-        }
-
-        /* HIDE */
-        .hide{
-            display:none;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.15);
+            opacity:0.9;
         }
 
     </style>
@@ -198,136 +221,185 @@
 <body>
 
 <div class="sidebar">
-    <h3>DEV PORTFOLIO</h3>
-    <a href="index.html">Home</a>
-    <a href="project.html">Projects</a>
-    <a href="info.html">Info</a>
+    <h3>Portfolio</h3>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="project.html" class="active">Projects</a>
+        <a href="info.html">Info</a>
+    </div>
 </div>
 
 <main>
 
-    <h1>Projects</h1>
-
-    <!-- FILTERS -->
-    <div class="filters">
-        <div class="filter active" onclick="filterProjects('all', this)">All</div>
-        <div class="filter" onclick="filterProjects('C#', this)">C#</div>
-        <div class="filter" onclick="filterProjects('C++', this)">C++</div>
-        <div class="filter" onclick="filterProjects('Unity', this)">Unity</div>
-        <div class="filter" onclick="filterProjects('Unreal', this)">Unreal</div>
-        <div class="filter" onclick="filterProjects('3D', this)">3D</div>
-        <div class="filter" onclick="filterProjects('2D', this)">2D</div>
-        <div class="filter" onclick="filterProjects('2.5D', this)">2.5D</div>
+    <div class="filters" id="filters">
+        <div class="filter-btn active" onclick="filterProjects('all', this)">All</div>
+        <div class="filter-btn" onclick="filterProjects('C++', this)">C++</div>
+        <div class="filter-btn" onclick="filterProjects('C#', this)">C#</div>
+        <div class="filter-btn" onclick="filterProjects('Unreal Engine', this)">Unreal Engine</div>
+        <div class="filter-btn" onclick="filterProjects('Unity', this)">Unity</div>
+        <div class="filter-btn" onclick="filterProjects('3D', this)">3D</div>
+        <div class="filter-btn" onclick="filterProjects('2D', this)">2D</div>
+        <div class="filter-btn" onclick="filterProjects('2.5D', this)">2.5D</div>
+        <div class="filter-btn" onclick="filterProjects('Group Project', this)">Group Project</div>
     </div>
 
-    <!-- PROJECTS -->
+    <div class="projects">
 
-    <div class="project" data-tags="Unreal C++ 3D">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f">
-        <div class="content">
-            <h2>Project 1</h2>
-            <p>Combat system prototype focused on feel.</p>
-            <div class="tags"><span class="tag">Unreal</span><span class="tag">C++</span><span class="tag">3D</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
+            <div class="project-content">
+                <h3>Project 1</h3>
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?1')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="Unreal AI 3D">
-        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d">
-        <div class="content">
-            <h2>Project 2</h2>
-            <p>Enemy AI system with behavior trees.</p>
-            <div class="tags"><span class="tag">Unreal</span><span class="tag">AI</span><span class="tag">3D</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C# Unity 2D Group Project">
+            <div class="project-content">
+                <h3>Project 2</h3>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">2D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?2')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="Unity C# 3D">
-        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1">
-        <div class="content">
-            <h2>Project 3</h2>
-            <p>Fast movement system inspired by action games.</p>
-            <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C++ Unreal Engine 2.5D Group Project">
+            <div class="project-content">
+                <h3>Project 3</h3>
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">2.5D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?3')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="C++ Networking 3D">
-        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f">
-        <div class="content">
-            <h2>Project 4</h2>
-            <p>Multiplayer prototype with synced gameplay.</p>
-            <div class="tags"><span class="tag">C++</span><span class="tag">Networking</span><span class="tag">3D</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C# Unity 3D Group Project">
+            <div class="project-content">
+                <h3>Project 4</h3>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?4')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="Unity 2D C#">
-        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e">
-        <div class="content">
-            <h2>Project 5</h2>
-            <p>2D exploration gameplay prototype.</p>
-            <div class="tags"><span class="tag">Unity</span><span class="tag">2D</span><span class="tag">C#</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C++ Unreal Engine 3D Solo">
+            <div class="project-content">
+                <h3>Project 5</h3>
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">3D</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?5')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="Unreal 3D RPG">
-        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
-        <div class="content">
-            <h2>Project 6</h2>
-            <p>RPG combat system with progression.</p>
-            <div class="tags"><span class="tag">Unreal</span><span class="tag">3D</span><span class="tag">RPG</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C# Unity 2D Group Project">
+            <div class="project-content">
+                <h3>Project 6</h3>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">2D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?6')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="Unity 2.5D C#">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
-        <div class="content">
-            <h2>Project 7</h2>
-            <p>2.5D animation-driven gameplay system.</p>
-            <div class="tags"><span class="tag">Unity</span><span class="tag">2.5D</span><span class="tag">C#</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C++ Unreal Engine 2.5D Solo">
+            <div class="project-content">
+                <h3>Project 7</h3>
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">2.5D</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?7')"></div>
         </div>
-    </div>
 
-    <div class="project" data-tags="Unreal C++ 3D">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f">
-        <div class="content">
-            <h2>Project 8</h2>
-            <p>Final year gameplay systems integration project.</p>
-            <div class="tags"><span class="tag">Unreal</span><span class="tag">C++</span><span class="tag">3D</span></div>
-            <a class="btn" href="#">View Project</a>
+        <div class="project" data-tags="C# Unity 3D Group Project">
+            <div class="project-content">
+                <h3>Project 8</h3>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">Group Project</span>
+                </div>
+            </div>
+            <div class="project-image" style="background-image:url('https://picsum.photos/800/600?8')"></div>
         </div>
+
     </div>
 
 </main>
 
 <script>
 
-    function filterProjects(tag, el){
+    function filterProjects(tag, btn){
 
-        document.querySelectorAll(".filter").forEach(f => f.classList.remove("active"));
-        el.classList.add("active");
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        if(btn) btn.classList.add("active");
 
-        document.querySelectorAll(".project").forEach(p => {
+        const projects = document.querySelectorAll(".project");
 
-            const tags = p.getAttribute("data-tags");
+        let visibleIndex = 0;
 
-            if(tag === "all"){
-                p.classList.remove("hide");
-                return;
-            }
+        projects.forEach(project => {
 
-            if(tags.includes(tag)){
-                p.classList.remove("hide");
+            const tags = project.dataset.tags;
+
+            const match = tag === "all" || tags.includes(tag);
+
+            if(match){
+                project.style.display = "grid";
+
+                project.classList.remove("reverse");
+
+                if(visibleIndex % 2 !== 0){
+                    project.classList.add("reverse");
+                }
+
+                visibleIndex++;
             } else {
-                p.classList.add("hide");
+                project.style.display = "none";
             }
 
         });
+
     }
+
+    /* FILTER BAR BACKGROUND ONLY WHEN SCROLLING */
+    const filters = document.getElementById("filters");
+
+    window.addEventListener("scroll", () => {
+        if(window.scrollY > 10){
+            filters.classList.add("scrolled");
+        } else {
+            filters.classList.remove("scrolled");
+        }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+        filterProjects("all", document.querySelector(".filter-btn"));
+    });
 
 </script>
 
