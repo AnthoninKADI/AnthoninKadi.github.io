@@ -11,21 +11,22 @@
             margin:0;
             font-family:Segoe UI, sans-serif;
             color:white;
-
             background:
                     linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.92)),
                     url("https://images.unsplash.com/photo-1550745165-9bc0b252726f") center/cover no-repeat;
-
             background-attachment:fixed;
+
+            position:relative;
         }
 
+        /* FIX BLUR BUG (IMPORTANT) */
         body::after{
             content:"";
             position:fixed;
             inset:0;
             backdrop-filter: blur(7px);
             pointer-events:none;
-            z-index:0;
+            z-index:-1;
         }
 
         body::before{
@@ -38,12 +39,7 @@
                     linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
             background-size:60px 60px;
             opacity:0.12;
-            z-index:1;
-        }
-
-        main, .sidebar{
-            position:relative;
-            z-index:2;
+            z-index:-1;
         }
 
         /* SIDEBAR */
@@ -59,6 +55,7 @@
             padding:20px;
             display:flex;
             flex-direction:column;
+            z-index:10;
         }
 
         .sidebar h3{
@@ -107,33 +104,50 @@
         /* MAIN */
         main{
             margin-left:240px;
-            padding:60px 40px;
+            padding:0 40px 60px;
         }
 
-        /* FILTER BAR */
+        /* HEADER */
+        .hero-header{
+            padding:90px 0 40px;
+            text-align:center;
+        }
+
+        .hero-header h1{
+            margin:0;
+            font-size:52px;
+            background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .hero-header p{
+            margin-top:12px;
+            opacity:0.65;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            font-size:13px;
+        }
+
+        /* FILTERS */
         .filters{
             position:sticky;
             top:0;
             z-index:10;
-
             display:flex;
             flex-wrap:wrap;
             gap:10px;
-
             padding:14px 0;
             margin-bottom:40px;
-
             transition:0.25s ease;
         }
 
-        /* ONLY WHEN SCROLLED */
         .filters.scrolled{
             background:rgba(10,15,25,0.75);
             backdrop-filter: blur(12px);
             border-bottom:1px solid rgba(255,255,255,0.08);
         }
 
-        /* FILTER BUTTONS */
         .filter-btn{
             padding:8px 14px;
             border-radius:999px;
@@ -164,7 +178,7 @@
         .project{
             display:grid;
             grid-template-columns:1fr 1fr;
-            min-height:420px;
+            min-height:460px;
             border-radius:20px;
             overflow:hidden;
             background:rgba(255,255,255,0.05);
@@ -180,30 +194,48 @@
         }
 
         .project-content{
-            padding:40px;
+            padding:45px;
             display:flex;
             flex-direction:column;
             justify-content:center;
-            gap:15px;
+            gap:12px;
         }
 
         .project-content h3{
             margin:0;
-            font-size:28px;
+            font-size:30px;
             background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
         }
 
-        .project-image{
-            background-size:cover;
-            background-position:center;
+        .project-content p{
+            opacity:0.75;
+            line-height:1.6;
+            font-size:14px;
         }
 
+        /* DATE */
+        .project-date{
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            font-size:12px;
+            letter-spacing:1px;
+            padding:6px 10px;
+            border-radius:999px;
+            width:fit-content;
+            background:rgba(77,163,255,0.12);
+            border:1px solid rgba(77,163,255,0.35);
+            color:#bfe3ff;
+        }
+
+        /* TAGS */
         .tags{
             display:flex;
             flex-wrap:wrap;
             gap:8px;
+            margin-top:5px;
         }
 
         .tag{
@@ -213,6 +245,11 @@
             background:rgba(255,255,255,0.08);
             border:1px solid rgba(255,255,255,0.15);
             opacity:0.9;
+        }
+
+        .project-image{
+            background-size:cover;
+            background-position:center;
         }
 
     </style>
@@ -231,6 +268,11 @@
 
 <main>
 
+    <div class="hero-header">
+        <h1>Projects</h1>
+        <p>Gameplay programming • systems • game prototypes</p>
+    </div>
+
     <div class="filters" id="filters">
         <div class="filter-btn active" onclick="filterProjects('all', this)">All</div>
         <div class="filter-btn" onclick="filterProjects('C++', this)">C++</div>
@@ -247,7 +289,9 @@
 
         <div class="project" data-tags="C++ Unreal Engine 3D Group Project">
             <div class="project-content">
-                <h3>Project 1</h3>
+                <h3>Another World Remake</h3>
+                <div class="project-date">📅 2024 → 2025</div>
+                <p>3D Unreal Engine remake of the classic prison escape section.</p>
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
@@ -260,7 +304,9 @@
 
         <div class="project" data-tags="C# Unity 2D Group Project">
             <div class="project-content">
-                <h3>Project 2</h3>
+                <h3>Unity 2D System</h3>
+                <div class="project-date">📅 2023</div>
+                <p>2D gameplay prototype focused on core mechanics.</p>
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
@@ -273,7 +319,9 @@
 
         <div class="project" data-tags="C++ Unreal Engine 2.5D Group Project">
             <div class="project-content">
-                <h3>Project 3</h3>
+                <h3>2.5D Prototype</h3>
+                <div class="project-date">📅 2024</div>
+                <p>Mix between 2D gameplay and 3D depth.</p>
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
@@ -286,7 +334,9 @@
 
         <div class="project" data-tags="C# Unity 3D Group Project">
             <div class="project-content">
-                <h3>Project 4</h3>
+                <h3>Unity 3D System</h3>
+                <div class="project-date">📅 2022 → 2023</div>
+                <p>3D gameplay mechanics prototype built in Unity.</p>
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
@@ -299,7 +349,9 @@
 
         <div class="project" data-tags="C++ Unreal Engine 3D Solo">
             <div class="project-content">
-                <h3>Project 5</h3>
+                <h3>AI System Prototype</h3>
+                <div class="project-date">📅 2023</div>
+                <p>Gameplay AI system with modular behavior.</p>
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
@@ -311,7 +363,9 @@
 
         <div class="project" data-tags="C# Unity 2D Group Project">
             <div class="project-content">
-                <h3>Project 6</h3>
+                <h3>2D Platform System</h3>
+                <div class="project-date">📅 2022</div>
+                <p>Platformer system focused on movement feel.</p>
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
@@ -324,7 +378,9 @@
 
         <div class="project" data-tags="C++ Unreal Engine 2.5D Solo">
             <div class="project-content">
-                <h3>Project 7</h3>
+                <h3>Combat Prototype</h3>
+                <div class="project-date">📅 2024</div>
+                <p>2.5D combat system with timing mechanics.</p>
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">Unreal Engine</span>
@@ -336,7 +392,9 @@
 
         <div class="project" data-tags="C# Unity 3D Group Project">
             <div class="project-content">
-                <h3>Project 8</h3>
+                <h3>Sandbox Prototype</h3>
+                <div class="project-date">📅 2023 → 2024</div>
+                <p>Experimental sandbox gameplay systems.</p>
                 <div class="tags">
                     <span class="tag">C#</span>
                     <span class="tag">Unity</span>
@@ -359,18 +417,14 @@
         if(btn) btn.classList.add("active");
 
         const projects = document.querySelectorAll(".project");
-
         let visibleIndex = 0;
 
         projects.forEach(project => {
 
-            const tags = project.dataset.tags;
-
-            const match = tag === "all" || tags.includes(tag);
+            const match = tag === "all" || project.dataset.tags.includes(tag);
 
             if(match){
                 project.style.display = "grid";
-
                 project.classList.remove("reverse");
 
                 if(visibleIndex % 2 !== 0){
@@ -386,15 +440,9 @@
 
     }
 
-    /* FILTER BAR BACKGROUND ONLY WHEN SCROLLING */
-    const filters = document.getElementById("filters");
-
     window.addEventListener("scroll", () => {
-        if(window.scrollY > 10){
-            filters.classList.add("scrolled");
-        } else {
-            filters.classList.remove("scrolled");
-        }
+        const filters = document.getElementById("filters");
+        filters.classList.toggle("scrolled", window.scrollY > 10);
     });
 
     window.addEventListener("DOMContentLoaded", () => {
