@@ -46,30 +46,26 @@
       z-index:2;
     }
 
-    /* SIDEBAR */
     .sidebar{
       position:fixed;
       left:0;
       top:0;
       height:100vh;
       width:220px;
-      padding:25px 18px;
-
       background:rgba(10,15,25,0.85);
       backdrop-filter: blur(14px);
-
       border-right:1px solid rgba(77,163,255,0.25);
-
+      padding:20px;
       display:flex;
       flex-direction:column;
     }
 
     .sidebar h3{
-      font-size:26px;
-      margin-bottom:40px;
+      font-size:36px;
+      margin-bottom:35px;
       text-align:center;
-      letter-spacing:2px;
-
+      letter-spacing:3px;
+      font-weight:700;
       background: linear-gradient(90deg, #ffffff, #4da3ff);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
@@ -87,100 +83,31 @@
       text-decoration:none;
       padding:12px 14px;
       border-radius:10px;
-      font-size:14px;
-      overflow:hidden;
       transition:0.25s;
     }
 
     .nav a::before{
       content:"";
       position:absolute;
-      left:0;
-      top:0;
+      inset:0;
       width:0%;
-      height:100%;
       background:linear-gradient(90deg,#4da3ff,#7c3aed);
       opacity:0.15;
       transition:0.25s;
     }
 
-    .nav a:hover::before{
-      width:100%;
-    }
+    .nav a:hover::before{ width:100%; }
 
     .nav a.active{
-      background:linear-gradient(90deg, rgba(77,163,255,0.25), rgba(124,58,237,0.25));
+      background:rgba(77,163,255,0.18);
       border:1px solid rgba(77,163,255,0.4);
     }
 
-    .nav a.active::after{
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      width:4px;
-      height:100%;
-      background:linear-gradient(#4da3ff,#7c3aed);
-    }
-
-    /* DARK MODE */
-    .top-controls{
-      position:fixed;
-      top:15px;
-      right:15px;
-      z-index:10;
-    }
-
-    .switch{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      width:90px;
-      padding:5px 8px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.25);
-    }
-
-    .switch input{ display:none; }
-
-    .slider{
-      width:28px;
-      height:14px;
-      background:rgba(255,255,255,0.25);
-      border-radius:999px;
-      position:relative;
-    }
-
-    .slider::before{
-      content:"";
-      position:absolute;
-      width:10px;
-      height:10px;
-      top:2px;
-      left:2px;
-      background:white;
-      border-radius:50%;
-      transition:0.3s;
-    }
-
-    input:checked + .slider::before{
-      transform:translateX(14px);
-    }
-
-    input:checked + .slider{
-      background:#4da3ff;
-    }
-
-    .icon{ font-size:16px; }
-
-    /* MAIN */
     main{
       margin-left:240px;
       padding:40px;
     }
 
-    /* HERO */
     .hero{
       display:grid;
       grid-template-columns: 1fr 1.2fr;
@@ -211,7 +138,6 @@
       -webkit-text-fill-color:transparent;
     }
 
-    /* DESC */
     .desc{
       display:flex;
       flex-direction:column;
@@ -238,7 +164,6 @@
       border-radius:10px;
     }
 
-    /* VIDEO */
     .hero-right{
       display:flex;
       flex-direction:column;
@@ -247,8 +172,14 @@
     }
 
     .video-title{
-      font-size:18px;
-      color:#4da3ff;
+      font-size:22px;
+      font-weight:700;
+      letter-spacing:1px;
+      background: linear-gradient(90deg, #ffffff, #4da3ff, #7c3aed);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      border-bottom:2px solid rgba(77,163,255,0.5);
+      padding-bottom:6px;
     }
 
     .video-wrapper{
@@ -266,7 +197,6 @@
       height:100%;
     }
 
-    /* SECTION TITLE */
     .section-title{
       margin-top:80px;
       font-size:28px;
@@ -275,7 +205,6 @@
       -webkit-text-fill-color:transparent;
     }
 
-    /* PROJECT */
     .latest-project{
       margin-top:30px;
       display:grid;
@@ -323,7 +252,6 @@
       border:1px solid rgba(255,255,255,0.15);
     }
 
-    /* BUTTON FIXED SPACING */
     .project-btn{
       margin-top:18px;
       align-self:flex-start;
@@ -347,49 +275,10 @@
               url("images/anotherworld1.gif") center/cover no-repeat;
     }
 
-    /* LIGHT MODE */
-    body.light{
-      color:#111;
-    }
-
-    body.light .sidebar{
-      background:rgba(255,255,255,0.85);
-    }
-
-    body.light .sidebar a{ color:#111; }
-
-    body.light .latest-project{
-      background:rgba(255,255,255,0.6);
-    }
-
-    body.light .section-title{
-      -webkit-text-fill-color:initial;
-      color:#4da3ff;
-    }
-
-    body.light .project-info h3{
-      -webkit-text-fill-color:initial;
-      color:#4da3ff;
-    }
-
-    body.light .tag{
-      background:rgba(0,0,0,0.05);
-      border:1px solid rgba(0,0,0,0.15);
-      color:#111;
-    }
-
   </style>
 </head>
 
 <body>
-
-<div class="top-controls">
-  <label class="switch">
-    <span class="icon">🌙</span>
-    <input type="checkbox" id="themeToggle" checked>
-    <span class="slider"></span>
-  </label>
-</div>
 
 <div class="sidebar">
   <h3>Portfolio</h3>
@@ -418,7 +307,7 @@
     </div>
 
     <div class="hero-right">
-      <div class="video-title">Demoreel 2026</div>
+      <div class="video-title">🎬 Demoreel 2026 🎬</div>
       <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
       </div>
@@ -459,12 +348,6 @@
   </div>
 
 </main>
-
-<script>
-  document.getElementById("themeToggle").addEventListener("change", function(){
-    document.body.classList.toggle("light", !this.checked);
-  });
-</script>
 
 </body>
 </html>
