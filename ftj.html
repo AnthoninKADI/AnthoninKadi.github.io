@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Segoe UI, sans-serif;
+            overflow:hidden;
+            color:white;
+
+            background:
+                    radial-gradient(circle at top, rgba(255,140,0,0.12), transparent 40%),
+                    linear-gradient(#050505,#090909);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            position:fixed;
+            left:0;
+            top:0;
+
+            width:220px;
+            height:100vh;
+
+            background:rgba(12,12,12,0.82);
+
+            backdrop-filter:blur(14px);
+
+            border-right:1px solid rgba(255,170,60,0.15);
+
+            padding:20px;
+
+            display:flex;
+            flex-direction:column;
+
+            z-index:10;
+        }
+
+        .sidebar h3{
+            font-size:36px;
+
+            margin-bottom:35px;
+
+            text-align:center;
+
+            letter-spacing:3px;
+
+            font-weight:700;
+
+            background:linear-gradient(90deg,#ffffff,#ffb347);
+
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .nav{
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+        }
+
+        .nav a{
+            position:relative;
+
+            color:white;
+
+            text-decoration:none;
+
+            padding:12px 14px;
+
+            border-radius:10px;
+
+            transition:0.25s;
+
+            overflow:hidden;
+        }
+
+        .nav a::before{
+            content:"";
+
+            position:absolute;
+
+            inset:0;
+
+            border-radius:10px;
+
+            background:linear-gradient(90deg,#ffb347,#ff7b00);
+
+            opacity:0;
+
+            transition:0.25s;
+        }
+
+        .nav a:hover::before{
+            opacity:0.12;
+        }
+
+        .nav a span{
+            position:relative;
+            z-index:2;
+        }
+
+        /* MAIN */
+
+        .container{
+            margin-left:220px;
+
+            width:calc(100vw - 220px);
+            height:100vh;
+
+            display:flex;
+            flex-direction:column;
+
+            align-items:center;
+            justify-content:center;
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        /* BACKGROUND EFFECT */
+
+        .grid{
+            position:absolute;
+            inset:0;
+
+            background-image:
+                    linear-gradient(rgba(255,140,0,0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,140,0,0.06) 1px, transparent 1px);
+
+            background-size:60px 60px;
+
+            animation:gridMove 8s linear infinite;
+
+            opacity:0.25;
+        }
+
+        @keyframes gridMove{
+            from{
+                transform:translateY(0px);
+            }
+
+            to{
+                transform:translateY(60px);
+            }
+        }
+
+        /* WARNING STRIPES */
+
+        .stripes{
+            position:absolute;
+
+            inset:0;
+
+            background:
+                    repeating-linear-gradient(
+                            -45deg,
+                            rgba(255,140,0,0.03),
+                            rgba(255,140,0,0.03) 20px,
+                            transparent 20px,
+                            transparent 40px
+                    );
+
+            animation:moveStripes 8s linear infinite;
+        }
+
+        @keyframes moveStripes{
+            from{
+                background-position:0 0;
+            }
+
+            to{
+                background-position:200px 0;
+            }
+        }
+
+        /* CONTENT */
+
+        .content{
+            position:relative;
+            z-index:2;
+
+            text-align:center;
+        }
+
+        .soon{
+            font-size:120px;
+
+            font-weight:900;
+
+            letter-spacing:10px;
+
+            text-transform:uppercase;
+
+            background:linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #ffb347,
+                    #ff7b00,
+                    #ffffff
+            );
+
+            background-size:300%;
+
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+
+            animation:shine 6s linear infinite;
+
+            text-shadow:
+                    0 0 25px rgba(255,140,0,0.25);
+        }
+
+        @keyframes shine{
+            0%{
+                background-position:0%;
+            }
+
+            100%{
+                background-position:300%;
+            }
+        }
+
+        .construction{
+            margin-top:18px;
+
+            font-size:14px;
+
+            letter-spacing:6px;
+
+            text-transform:uppercase;
+
+            color:rgba(255,255,255,0.55);
+        }
+
+        .date{
+            margin-top:40px;
+
+            font-size:28px;
+
+            font-weight:700;
+
+            letter-spacing:4px;
+
+            color:#ffb347;
+
+            animation:pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse{
+            0%,100%{
+                opacity:0.5;
+                transform:scale(1);
+            }
+
+            50%{
+                opacity:1;
+                transform:scale(1.03);
+            }
+        }
+
+        /* GLOW */
+
+        .glow{
+            position:absolute;
+
+            width:600px;
+            height:600px;
+
+            border-radius:50%;
+
+            background:radial-gradient(
+                    circle,
+                    rgba(255,140,0,0.18),
+                    transparent 70%
+            );
+
+            filter:blur(60px);
+
+            animation:float 8s ease-in-out infinite;
+        }
+
+        @keyframes float{
+            0%,100%{
+                transform:translateY(0px);
+            }
+
+            50%{
+                transform:translateY(-30px);
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h3>Portfolio</h3>
+
+    <div class="nav">
+
+        <a href="index.html">
+            <span>Home</span>
+        </a>
+
+        <a href="project.html">
+            <span>Projects</span>
+        </a>
+
+        <a href="info.html">
+            <span>Info</span>
+        </a>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="grid"></div>
+
+    <div class="stripes"></div>
+
+    <div class="glow"></div>
+
+    <div class="content">
+
+        <div class="soon">
+            COMING SOON
+        </div>
+
+        <div class="construction">
+            NOT RELEASE YET
+        </div>
+
+        <div class="date">
+             JUNE 16th 2026
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
