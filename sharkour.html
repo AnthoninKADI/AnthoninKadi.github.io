@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharkour!</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Segoe UI, sans-serif;
+            color:white;
+
+            background:
+                    linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.93)),
+                    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070") center/cover no-repeat;
+
+            background-attachment:fixed;
+        }
+
+        .sidebar{
+            position:fixed;
+            left:0;
+            top:0;
+            height:100vh;
+            width:220px;
+            background:rgba(10,15,25,0.85);
+            backdrop-filter: blur(14px);
+            border-right:1px solid rgba(120,120,255,0.25);
+            padding:20px;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .sidebar h3{
+            font-size:36px;
+            margin-bottom:35px;
+            text-align:center;
+            letter-spacing:3px;
+            font-weight:700;
+            background: linear-gradient(90deg, #ffffff, #5cc8ff, #9b6dff);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .nav{
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+        }
+
+        .nav a{
+            position:relative;
+            color:white;
+            text-decoration:none;
+            padding:12px 14px;
+            border-radius:10px;
+            transition:0.25s;
+        }
+
+        .nav a::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            width:0%;
+            background:linear-gradient(90deg,#5cc8ff,#9b6dff);
+            opacity:0.15;
+            transition:0.25s;
+        }
+
+        .nav a:hover::before{
+            width:100%;
+        }
+
+        .nav a.active{
+            background:rgba(92,200,255,0.12);
+            border:1px solid rgba(92,200,255,0.35);
+        }
+
+        main{
+            margin-left:240px;
+            padding:30px;
+
+            display:grid;
+            grid-template-columns:1.2fr 0.8fr;
+            gap:25px;
+        }
+
+        .card{
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:22px;
+            padding:28px;
+            backdrop-filter:blur(10px);
+        }
+
+        h1{
+            font-size:58px;
+            margin:0 0 6px;
+
+            background:linear-gradient(90deg,#fff,#5cc8ff,#9b6dff);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .sub{
+            font-size:12px;
+            letter-spacing:3px;
+            opacity:0.6;
+            margin-bottom:10px;
+            text-transform:uppercase;
+        }
+
+        .tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-bottom:18px;
+        }
+
+        .tag{
+            font-size:11px;
+            padding:5px 10px;
+            border-radius:999px;
+
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.12);
+            color:rgba(255,255,255,0.8);
+        }
+
+        p{
+            font-size:13.5px;
+            line-height:1.8;
+            opacity:0.88;
+        }
+
+        .section{
+            margin-top:24px;
+        }
+
+        .section h2{
+            font-size:16px;
+            margin-bottom:10px;
+            color:#5cc8ff;
+        }
+
+        ul{
+            padding-left:18px;
+        }
+
+        li{
+            margin-bottom:10px;
+            line-height:1.7;
+            font-size:13.5px;
+            opacity:0.9;
+        }
+
+        .team{
+            margin-top:14px;
+            display:flex;
+            flex-direction:column;
+            gap:14px;
+        }
+
+        .team-role{
+            padding:14px;
+            border-radius:14px;
+
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .team-title{
+            font-size:12px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            color:#5cc8ff;
+            margin-bottom:10px;
+        }
+
+        .team-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:8px 18px;
+        }
+
+        .team-grid a{
+            font-size:13px;
+            color:rgba(255,255,255,0.75);
+            text-decoration:none;
+            padding:6px 8px;
+            border-radius:8px;
+            transition:0.2s;
+        }
+
+        .team-grid a:hover{
+            background:rgba(92,200,255,0.08);
+            color:#7fd6ff;
+        }
+
+        .media{
+            display:flex;
+            flex-direction:column;
+            gap:14px;
+        }
+
+        .video{
+            aspect-ratio:16/9;
+            width:100%;
+            border-radius:16px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.25);
+        }
+
+        .video iframe{
+            width:100%;
+            height:100%;
+        }
+
+        .carousel{
+            aspect-ratio:16/9;
+            width:100%;
+            border-radius:16px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.25);
+            position:relative;
+        }
+
+        .carousel img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .arrow{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            width:38px;
+            height:38px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:rgba(0,0,0,0.5);
+            border:1px solid rgba(255,255,255,0.3);
+            cursor:pointer;
+            user-select:none;
+        }
+
+        .arrow.left{ left:10px; }
+        .arrow.right{ right:10px; }
+
+        .arrow:hover{
+            background:rgba(92,200,255,0.25);
+        }
+
+        .download{
+            display:block;
+            margin-top:4px;
+            padding:13px;
+            text-align:center;
+            border-radius:12px;
+            text-decoration:none;
+            font-weight:700;
+            color:white;
+
+            background:linear-gradient(90deg,#5cc8ff,#9b6dff);
+            transition:0.25s;
+        }
+
+        .download:hover{
+            transform:translateY(-3px);
+            box-shadow:0 10px 30px rgba(92,200,255,0.25);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h3>Portfolio</h3>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="project.html">Projects</a>
+        <a href="info.html">Info</a>
+    </div>
+
+</div>
+
+<main>
+
+    <div class="card">
+
+        <div class="sub">2026 • Game Jam • 3D • Unreal Engine • Team Project</div>
+
+        <h1>Sharkour!</h1>
+
+        <div class="tags">
+            <div class="tag">Unreal Engine</div>
+            <div class="tag">C++</div>
+            <div class="tag">3D</div>
+            <div class="tag">Game Jam</div>
+        </div>
+
+        <p>
+            Sharkour! is a 3D game developed with Unreal Engine 5 during the Global Game Jam 2026. The project was built around a unique mask-switching mechanic that directly drives traversal, visibility, and level progression.
+        </p>
+
+        <p>
+            Each mask is associated with a specific color and reveals matching platforms hidden throughout the environment. Players must constantly adapt and switch masks strategically to discover the correct path and continue progressing through increasingly challenging platforming sequences.
+        </p>
+
+        <p>
+            A special mask introduces an additional gameplay layer by revealing every platform at once for a limited duration, forcing players to manage timing, cooldowns, and movement precision under pressure.
+        </p>
+
+        <p>
+            To maintain tension and momentum, a massive wall of water filled with sharks relentlessly chases the player throughout the experience, creating a fast-paced atmosphere focused on reaction speed, readability, and traversal mastery.
+        </p>
+
+        <div class="section">
+
+            <h2>Challenges of the project</h2>
+
+            <ul>
+
+                <li>Designing a clear and intuitive mask-switching mechanic tied directly to navigation and level readability.</li>
+
+                <li>Balancing visibility, timing, and player understanding across multiple platform states and color systems.</li>
+
+                <li>Creating a constant feeling of urgency with the advancing water wall and maintaining gameplay readability during high-speed sequences.</li>
+
+                <li>
+                    <span style="color:#5cc8ff;">
+                        <b><u>My contribution:</u></b>
+                    </span>
+                    I developed the platform system, the water wall behavior, the mask UI system, and contributed to the overall level design and gameplay flow.
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="section">
+
+            <h2>What you’ll experience</h2>
+
+            <ul>
+
+                <li>Switch between masks to reveal hidden platforms and progress through the environment.</li>
+
+                <li>Master timing mechanics using a special mask that temporarily reveals the complete path.</li>
+
+                <li>Escape from a relentless wall of water filled with sharks while navigating challenging platforming sections.</li>
+
+                <li>Experience a fast-paced and intense 3D gameplay loop focused on movement, timing, and adaptation.</li>
+
+            </ul>
+
+            <p>
+                Sharkour! showcases rapid prototyping, creative gameplay experimentation, and efficient teamwork under the strict time constraints of a game jam environment.
+            </p>
+
+        </div>
+
+        <div class="section">
+
+            <h2>Team</h2>
+
+            <div class="team">
+
+                <div class="team-role">
+
+                    <div class="team-title">Artist</div>
+
+                    <div class="team-grid">
+                        <a href="https://www.linkedin.com/in/l%C3%A9ane-moreau/">Leane MOREAU</a>
+                    </div>
+
+                </div>
+
+                <div class="team-role">
+
+                    <div class="team-title">Designer / Programmer</div>
+
+                    <div class="team-grid">
+                        <a href="https://www.linkedin.com/in/anthonin-kadi-4980b7262/">Anthonin KADI</a>
+                        <a href="https://www.linkedin.com/in/loris-moreau">Loris MOREAU</a>
+                        <a href="https://www.linkedin.com/in/ewan-duplessis-kergomard/">Ewan DUPLESSIS KERGOMARD</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="media">
+
+        <div class="video">
+            <iframe src="https://www.youtube.com/embed/GT-wN25hhhA" allowfullscreen></iframe>
+        </div>
+
+        <div class="carousel" data-images="images/Sharkour.png">
+
+            <div class="arrow left" onclick="change(this,-1)">❮</div>
+
+            <img src="">
+
+            <div class="arrow right" onclick="change(this,1)">❯</div>
+
+        </div>
+
+        <a class="download" href="https://drive.google.com/uc?export=download&id=1SSi6FVgnFMqIiLi3ZIpWQ2ZPlzFUYFkg" target="_blank">
+            Download Game
+        </a>
+       
+    </div>
+
+</main>
+
+<script>
+
+    function init(){
+
+        document.querySelectorAll(".carousel").forEach(c=>{
+
+            const imgs = c.dataset.images.split(",");
+
+            c.dataset.index = 0;
+
+            c.querySelector("img").src = imgs[0];
+        });
+    }
+
+    function change(el,dir){
+
+        const c = el.parentElement;
+
+        const imgs = c.dataset.images.split(",");
+
+        let i = parseInt(c.dataset.index);
+
+        i = (i + dir + imgs.length) % imgs.length;
+
+        c.dataset.index = i;
+
+        c.querySelector("img").src = imgs[i];
+    }
+
+    init();
+
+</script>
+
+</body>
+</html>
